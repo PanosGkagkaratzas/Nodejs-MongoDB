@@ -1,0 +1,414 @@
+.AllMyVehiclesInfo{
+    overflow-y: auto;
+    position:relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bar{
+    position: relative;
+    width: 100%;
+    height: 6%;
+}
+
+.bar #keyword{
+    position: absolute;
+    background-image: url('/icons/search.png');
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 6%;
+    text-indent: 6%;
+    width: 30%;
+    height: 90%;
+    font-size: 16px;
+    float: left;
+    border: 1px solid #ddd;
+}
+
+.bar #addVehicle
+{
+    position: relative;
+    background-image: url('/icons/add.png');
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 80%;
+    float: right;
+    width: 50px;
+    height: 100%;
+    border-style: none;
+}
+
+.bar #counter{
+    position: absolute;
+    height: 0px;
+    float: right;
+    font-size: 20px;
+    color: black;
+    padding-left: 50%;
+}
+
+.editVehiclePopup {
+    display: none;
+    position: relative;
+    margin-left: 34%;
+}
+
+.edit_vehicle_container{
+    width: 500px;
+    height: 700px;
+    position: fixed;
+    background-color: #fff;
+    border: 3px solid black;
+}
+
+.edit_vehicle_container #edit_vehicle_title{
+    text-align: center;
+    font-size: 30px;
+}
+
+.e_manufactor{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.e_manufactor #edit_manufactor{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_model{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 40px;
+}
+
+.e_model #edit_model{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_v_plate{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 60px;
+}
+
+.e_v_plate #edit_v_plate{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_color{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 80px;
+}
+
+.e_color #edit_color{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_CC{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 100px;
+}
+
+.e_CC #edit_cc{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_horse_power{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 120px;
+}
+
+.e_horse_power #edit_hp{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.edit_vehicle_buttons{
+    width: 400px;
+    height: 210px;
+    position: relative;
+    top: 140px;
+}
+
+.edit_vehicle_buttons #complete_vehicle_edit{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 30px;
+    background-color: green;
+    font-size: 30px;
+    color: white;
+}
+
+.edit_vehicle_buttons #edit_cancel{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: red;
+    font-size: 30px;
+    color: white;
+}
+
+.newVehiclePopup {
+    display: none;
+    position: relative;
+    margin-left: 34%;
+}
+
+.new_vehicle_container{
+    width: 500px;
+    height: 700px;
+    position: fixed;
+    background-color: #fff;
+    border: 3px solid black;
+}
+
+.new_vehicle_container #new_vehicle_title{
+    text-align: center;
+    font-size: 30px;
+}
+
+.a_manufactor{
+    width: 400px;
+    height: 50px;
+    position: relative;
+}
+
+.a_manufactor #new_manufactor{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_model{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.a_model #new_model{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_v_plate{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 40px;
+}
+
+.a_v_plate #new_v_plate{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_category{
+    width: 408px;
+    height: 50px;
+    position: relative;
+    top: 60px;
+}
+
+.a_category #new_category{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 408px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_color{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 80px;
+}
+
+.a_color #new_color{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_CC{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 100px;
+}
+
+.a_CC #new_cc{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_horse_power{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 120px;
+}
+
+.a_horse_power #new_hp{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.a_register_date{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 140px;
+}
+
+.a_register_date #new_date{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.new_vehicle_buttons{
+    width: 100%;
+    height: 210px;
+    position: relative;
+    top: 160px;
+}
+
+.new_vehicle_buttons #complete_vehicle_add{
+    margin-right: 9%;
+    float: right;
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 12px;
+    background-color: green;
+    font-size: 22px;
+    color: white;
+}
+
+.new_vehicle_buttons #add_cancel{
+    margin-left: 9%;
+    float: left;
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 12px;
+    background-color: red;
+    font-size: 22px;
+    color: white;
+}
+
+table{
+    background-color: white;
+    width: 100%;
+    text-align: center; 
+    border: 1px solid black;
+}
+
+th{
+    width: 10%;
+    height: 10%;
+    color: white;
+    border: 1px solid black;
+    background-color: darkslateblue;
+    font-size: x-large;
+}
+
+td{
+    width: 10%;
+    height: 20%;
+    border: 1px solid black;
+    font-size: larger;
+    padding: 2%;
+    font-style: italic;
+}
+
+table #edit{
+    background-image: url('/icons/user-settings.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: left;
+    border: none;
+}
+
+table #delete{
+    background-image: url('/icons/delete.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: right;
+    border: none;
+}
+
+table #edit:hover{
+    background-color: gray;
+}
+
+table #delete:hover{
+    background-color: gray;
+}

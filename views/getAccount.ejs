@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <link rel="stylesheet" href="/css/getAccount.css">
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <div class="userInfo">
+
+            <div class="user_settings">
+                <button onclick="dropdown_user_settings()" class="user_settings_button" id="user_settings"></button>
+
+                <div id="user_settings_dropdown" class="user_dropdown-content">
+                    <button id="edit_user" onclick="profile_edit()">Edit my profile</button> 
+                    <button id="change_pass" onclick="forgot_pass()">Change password</button>
+                    <button id="delete_account" onclick="delete_acc(document.getElementById('email'))">Delete account</button> 
+                </div>
+
+                <script>
+                    function dropdown_user_settings() {
+                        document.getElementById("user_settings_dropdown").classList.toggle("show");
+                    }
+
+                    window.onclick = function(event) {
+                        if (!event.target.matches('.user_settings_button')) {
+                            var dropdowns = document.getElementsByClassName("user_dropdown-content");
+                            var i;
+                            for (i = 0; i < dropdowns.length; i++) {
+                                var openDropdown = dropdowns[i];
+                                if (openDropdown.classList.contains('show')) {
+                                    openDropdown.classList.remove('show');
+                                }
+                            }
+                        }
+                    }
+                </script>
+                
+            </div>
+
+            <div class="forgotPopup" id="ForgotPopupForm">
+    
+                <div class="forgot_container">
+    
+                    <h2 id="forgot_title">Password change</h2>
+
+                    <div class="f_login_old_pass">
+                        <input type="password" name="Password" id="old_pass" placeholder="Old Password" value="<%= User.Password %>" >
+                    </div>
+    
+                    <div class="f_login_pass">
+                        <input type="password" name="Password" id="pass2" placeholder="New Password" value="<%= User.newPassword %>" >
+                    </div>
+    
+                    <div class="f_login_conf_pass">
+                        <input type="password" name="Password2" id="conf_pass2" placeholder="Confirm Password" value="<%= User.newPassword2 %>" >
+                    </div>
+    
+                    <div class="f_buttons">
+                        <button id="change_password" onclick="change_pass(document.getElementById('old_pass').value,document.getElementById('pass2').value,document.getElementById('conf_pass2').value)">Change password</button> 
+                        <button type="button" id="f_cancel" onclick="forgot_pass_close()">Cancel</button>
+                    </div>
+    
+                    <script>
+                        
+                        function forgot_pass() {
+                            document.getElementById("ForgotPopupForm").style.display = "block";
+                        }
+                        function forgot_pass_close() {
+                            document.getElementById("ForgotPopupForm").style.display = "none";
+                        }
+    
+                        function change_pass(old_pass, pass2, conf_pass2) {
+                            var response = '';
+                            var email2 = document.getElementById("email").innerHTML;
+                            console.log("Email2:", email2)
+                            
+                            $.ajax({ type: "POST",   
+                                url: "/users/changePass",
+                                data: {
+                                    "Email":email2,
+                                    "Password":old_pass,
+                                    "newPassword":pass2,
+                                    'newPassword2':conf_pass2
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Password changed successfully"){
+                                        swal(response, {
+                                            icon: "success",
+                                        });
+                                        forgot_pass_close();
+                                    }
+                                    else{
+                                        swal(response, {
+                                            icon: "warning",
+                                        });
+                                    }
+                                },
+                                error: function(e){
+                                    swal("Login error!", {
+                                        icon: "warning",
+                                    });
+                                }
+                            });
+                        }
+    
+                    </script>
+
+                </div>
+
+            </div>
+
+            <script>
+
+                function delete_acc(user_email){
+
+                    var userID = sessionStorage.getItem("User_id")
+                            
+                    swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, this operation can't be reverted!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({ type: "DELETE",   
+                                url: "/users/login/completeDelete/",
+                                data: {
+                                    "ID":userID
+                                },
+                                dataType:"text",
+                                success: function(data){
+                                    swal("User has been deleted!\nLogging out...", {
+                                        icon: "success",
+                                    });
+                                    var timer = setTimeout(function() {
+                                        window.location='http://localhost:3000/users'
+                                    }, 3000);
+                                }
+                            })
+                        }
+                    });          
+                }
+
+            </script>
+
+            <div class="editPopup" id="EditPopupForm">
+
+                <div class="edit_container">
+
+                    <h2 id="edit_title">Edit your personal info</h2>
+
+                    <div class="e_fname">
+                        <input type="text" id="edit_fname" name="FirstName" value="<%= User.FirstName %>" >
+                    </div>
+    
+                    <div class="e_lname">
+                        <input type="text" id="edit_lname" name="LastName" value="<%= User.LastName %>" >
+                    </div>
+    
+                    <div class="e_email">
+                        <input type="text" id="edit_email" name="Email" value="<%= User.Email %>" >
+                    </div>
+
+                    <div class="edit_buttons">
+                        <button id="complete_edit" onclick="edit_profile(document.getElementById('edit_fname').value,document.getElementById('edit_lname').value,document.getElementById('edit_email').value)">Confirm changes</button> 
+                        <button type="button" id="edit_cancel" onclick="profile_edit_close()">Cancel</button>
+                    </div>
+
+                    <script>
+
+                        function profile_edit() {
+                            document.getElementById("EditPopupForm").style.display = "block";
+
+                            document.querySelector('[name="FirstName"]').value = document.getElementById("fname").innerHTML;
+                            document.querySelector('[name="LastName"]').value = document.getElementById("lname").innerHTML;
+                            document.querySelector('[name="Email"]').value = document.getElementById("email").innerHTML;
+
+                        }
+                        function profile_edit_close() {
+                            document.getElementById("EditPopupForm").style.display = "none";
+                        }
+
+                        function edit_profile(ed_fname, ed_lname, ed_email) {
+                            var response = '';
+                            
+                            $.ajax({ type: "POST",   
+                                url: "http://localhost:3000/users/login/updateUser",  
+                                data: {
+                                    "OldEmail":document.getElementById("email").innerHTML,
+                                    "FirstName":ed_fname,
+                                    "LastName":ed_lname,
+                                    "Email":ed_email
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Profile changed successfully"){
+                                        swal({
+                                            title: "Success!",
+                                            text: "Applying changes...\nRestarting page in 5 seconds",
+                                            icon: "success"
+                                        });
+
+                                        sessionStorage.setItem("Email", ed_email);
+
+                                        document.getElementById("EditPopupForm").style.display = "none";
+
+                                        setTimeout(function() {
+                                            document.location.reload()
+                                        }, 5000);
+                                    }
+                                    else{
+                                        swal({
+                                            title: "Warning!",
+                                            text: response,
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                error: function(e){
+                                    swal("Error saving users info", {
+                                        icon: "warning",
+                                    });
+                                }
+                            });                        
+                        }
+
+                    </script>
+
+                </div>
+
+            </div>
+
+            <table>
+            
+                <tr>
+                    <th> First name </th>
+                    <th> Last name </th>
+                    <th> Email </th>
+                    <th> Registration date </th>
+                </tr>
+                <tr>
+                    <td> <p id="fname"></p> </td>
+                    <td> <p id="lname"> </p> </td>
+                    <td> <p id="email"> </p> </td>
+                    <td> <p id="reg"> </p> </td>
+                </tr>
+               
+            </table>
+
+        </div>
+
+        <script>
+
+            var response = '';
+            var userID = sessionStorage.getItem("User_id")
+
+            $.ajax({ type: "GET",   
+                url: "/users/login/getAccount/"+userID,
+                success : function(text)
+                {
+                    response = text
+
+                    email = response.Email
+                    firstName = response.FirstName
+                    lastName = response.LastName
+                    regTime = response.Register_time
+
+                    document.getElementById("email").innerHTML = email
+                    document.getElementById("fname").innerHTML = firstName
+                    document.getElementById("lname").innerHTML = lastName
+                    document.getElementById("reg").innerHTML = regTime
+                },
+                error: function(e){
+                    swal("Error fetching users info", {
+                        icon: "warning",
+                    });
+                }
+            });
+                  
+        </script>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+
+    </body>
+
+</html>

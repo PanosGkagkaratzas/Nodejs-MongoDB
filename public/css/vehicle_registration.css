@@ -1,0 +1,914 @@
+body{
+    background-color: orange;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: blue;
+}
+
+.vehicle_register{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.register_vehicle_info{
+    width: 600px;
+    height: 600px;
+    margin-top: 120px;
+    margin-left: 300px;
+    position:relative;
+    float: left;
+    text-align: center;
+}
+
+.register_vehicle_info #vehicle_register_tip_icon{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.register_vehicle_info #vehicle_register_tip{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 30px;
+    color: red;
+    width: 400px;
+    height: 40px;
+    padding-top: 5px;
+}
+
+.c_register_manufactor_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_manufactor_tip #manufactor_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_manufactor_tip #manufactor_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_model_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_model_tip #model_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_model_tip #model_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_plate_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_plate_tip #plate_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_plate_tip #plate_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_category_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_category_tip #category_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_category_tip #category_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_color_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_color_tip #color_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_color_tip #color_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_cc_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_cc_tip #cc_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_cc_tip #cc_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_hp_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_hp_tip #hp_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_hp_tip #hp_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_date_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_date_tip #date_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_date_tip #date_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.register_vehicle_info #free_tips{
+    margin-top: 60px;
+    color: dimgrey;
+    font-size: 25px;
+    font-style: oblique;
+}
+
+.register_vehicle_frame{
+    width: 600px;
+    height: 650px;
+    border: 5px solid transparent;
+    border-top-left-radius: 80px 350px;
+    border-bottom-left-radius: 80px 350px;
+    background-color: white;
+    margin-top: 120px;
+    margin-left: 1000px;
+    position:relative;
+}
+
+.vehicle_logo{
+    height: 70px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.vehicle_logo #vehicle_img{
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgb(156, 5, 5);
+    border-radius: 50px;
+}
+
+.c_register_manufactor{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+}
+
+.c_register_manufactor #manufactor_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_manufactor #manufactor{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_model{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 20px;
+}
+
+.c_register_model #model_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_model #model{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_plate{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 40px;
+}
+
+.c_register_plate #plate_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_plate #plate{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_category{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 60px;
+}
+
+.c_register_category #category_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_category #category{
+    height: 36px;
+    width: 208px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_color{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 80px;
+}
+
+.c_register_color #color_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_color #color{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_cc{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 100px;
+}
+
+.c_register_cc #cc_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_cc #cc{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_hp{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 120px;
+}
+
+.c_register_hp #hp_label{
+    width: 320px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.c_register_hp #hp{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_date{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 140px;
+}
+
+.c_register_date #date_label{
+    width: 320px;
+    height: 25px;
+    padding-top: 5px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+}
+
+.c_register_date #date{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 350px;
+    font-size: 18px;
+}
+
+.c_register_button{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 170px;
+}
+
+.c_register_button #register_button{
+    background-image: url('/icons/ok.png');
+    background-position-x: 155px;
+    background-position-y: center;
+    background-size: 35px;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 50px;
+    font-size: 22px;
+    margin-left: 320px;
+    border-radius: 12px;
+    background-color: blue;
+    color: white;
+}
+
+@media all and (max-width:1680px){
+    .register_vehicle_info{
+        margin-top: 140px;
+        margin-left: 170px;
+    }
+    
+    .register_vehicle_frame{
+        margin-top: 140px;
+        margin-left: 850px;
+    }
+}
+
+@media all and (max-width:1600px){
+    .register_vehicle_info{
+        margin-top: 70px;
+        margin-left: 150px;
+    }
+    
+    .register_vehicle_frame{
+        margin-top: 70px;
+        margin-left: 820px;
+    }
+}
+
+@media all and (max-width:1440px){
+    .register_vehicle_info{
+        margin-top: 70px;
+        margin-left: 80px;
+    }
+    
+    .register_vehicle_frame{
+        margin-top: 70px;
+        margin-left: 730px;
+    }
+}
+
+@media all and (max-width:1366px){
+    .register_vehicle_info{
+        width: 500px;
+        height: 500px;
+        margin-top: 50px;
+        margin-left: 120px;
+    }
+    
+    .register_vehicle_info #vehicle_register_tip_icon{
+        width: 35px;
+        height: 35px;
+        margin-left: 145px;
+    }
+    
+    .register_vehicle_info #vehicle_register_tip{
+        font-size: 24px;
+        width: 300px;
+        height: 35px;
+        padding-top: 10px;
+    }
+    
+    .c_register_manufactor_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_manufactor_tip #manufactor_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_manufactor_tip #manufactor_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_model_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_model_tip #model_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_model_tip #model_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+
+    .c_register_plate_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_plate_tip #plate_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_plate_tip #plate_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_category_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_category_tip #category_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_category_tip #category_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_color_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_color_tip #color_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_color_tip #color_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_cc_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_cc_tip #cc_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_cc_tip #cc_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_hp_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_hp_tip #hp_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_hp_tip #hp_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_date_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_date_tip #date_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_date_tip #date_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .register_vehicle_frame{
+        width: 500px;
+        height: 500px;
+        margin-top: 70px;
+        margin-left: 700px;
+    }
+    
+    .vehicle_logo{
+        height: 35px;
+        margin-top: 5px;
+    }
+    
+    .vehicle_logo #vehicle_img{
+        width: 40px;
+        height: 40px;
+    }
+
+    h1{
+        font-size: 25px;
+    }
+    
+    .c_register_manufactor{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_manufactor #manufactor_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_manufactor #manufactor{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_model{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_model #model_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_model #model{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+
+    .c_register_plate{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_plate #plate_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_plate #plate{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_category{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_category #category_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_category #category{
+        height: 32px;
+        width: 188px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_color{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_color #color_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_color #color{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_cc{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_cc #cc_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_cc #cc{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_hp{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_hp #hp_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_hp #hp{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_date{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_date #date_label{
+        width: 220px;
+        font-size: 20px;
+    }
+    
+    .c_register_date #date{
+        height: 25px;
+        width: 183px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_button{
+        width: 500px;
+        height: 25px;
+        top: 160px;
+    }
+    
+    .c_register_button #register_button{
+        background-position-x: 135px;
+        background-size: 25px;
+        width: 170px;
+        height: 40px;
+        margin-left: 270px;
+    }
+}
+
+@media all and (max-width:1280px){
+    .register_vehicle_info{
+        width: 500px;
+        height: 500px;
+        margin-left: 100px;
+    }
+
+    .register_vehicle_info #free_tips{
+        margin-top: 40px;
+        font-size: 22px;
+    }
+    
+    .register_vehicle_frame{
+        width: 500px;
+        height: 500px;
+        margin-left: 650px;
+    }
+}

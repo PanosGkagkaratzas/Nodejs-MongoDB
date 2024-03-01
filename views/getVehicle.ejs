@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link rel="stylesheet" href="/css/getVehicle.css">
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <script
+            scr="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+            
+        <div class="AllMyVehiclesInfo">
+
+            <div class="bar">
+                <input type="text" id="keyword" onkeyup="findWord()" placeholder="Search">
+                <p id="counter"></p>
+                <input type="button" id="addVehicle" onclick="newVehicle()">
+            </div>
+
+            <div class="editVehiclePopup" id="EditVehiclePopupForm">
+
+                <div class="edit_vehicle_container">
+
+                    <h2 id="edit_vehicle_title">Edit vehicle info</h2>
+
+                    <div class="e_manufactor">
+                        <input type="text" id="edit_manufactor" name="Manufactor" value="<%= Vehicle.Manufactor %>" >
+                    </div>
+
+                    <div class="e_model">
+                        <input type="text" id="edit_model" name="Model" value="<%= Vehicle.Model %>" >
+                    </div>
+
+                    <div class="e_v_plate">
+                        <input type="text" id="edit_v_plate" name="VehiclePlate" value="<%= Vehicle.Vehicle_plate %>" >
+                    </div>
+
+                    <div class="e_color">
+                        <input type="text" id="edit_color" name="Color" value="<%= Vehicle.Color %>" >
+                    </div>
+
+                    <div class="e_CC">
+                        <input type="text" id="edit_cc" name="CC" value="<%= Vehicle.CC %>" >
+                    </div>
+
+                    <div class="e_horse_power">
+                        <input type="text" id="edit_hp" name="HorsePower" value="<%= Vehicle.HP %>" >
+                    </div>
+
+                    <div class="edit_vehicle_buttons">
+                        <button id="complete_vehicle_edit" onclick="edit_vehicle(document.getElementById('edit_v_plate').value,document.getElementById('edit_manufactor').value,document.getElementById('edit_model').value,document.getElementById('edit_color').value,document.getElementById('edit_cc').value,document.getElementById('edit_hp').value)">Confirm changes</button> 
+                        <button type="button" id="edit_cancel" onclick="editVehicle_close()">Cancel</button>
+                    </div>
+
+                    <script>
+
+                        var selected_plate;
+
+                        function editVehicle(r) {
+                            var i = r.parentNode.parentNode.rowIndex;
+
+                            for(var z=0; z<UserVehicleInfo_table.length; z++)
+                            {
+
+                                if(UserVehicleInfo_table[z][0]==i-1)
+                                {
+                                    selected_plate = UserVehicleInfo_table[z][4];
+
+                                    document.querySelector('[name="Manufactor"]').value = UserVehicleInfo_table[z][2];
+                                    document.querySelector('[name="Model"]').value = UserVehicleInfo_table[z][3];
+                                    document.querySelector('[name="VehiclePlate"]').value = UserVehicleInfo_table[z][4];
+                                    document.querySelector('[name="Color"]').value = UserVehicleInfo_table[z][5];
+                                    document.querySelector('[name="CC"]').value = UserVehicleInfo_table[z][6];
+                                    document.querySelector('[name="HorsePower"]').value = UserVehicleInfo_table[z][7];
+                                }
+                            }
+
+                            document.getElementById("EditVehiclePopupForm").style.display = "block";
+                        }
+
+                        function editVehicle_close() {
+                            document.getElementById("EditVehiclePopupForm").style.display = "none";
+                        }
+
+                        function edit_vehicle(ed_v_plate, ed_manufactor, ed_model, ed_color, ed_cc, ed_hp) {
+                            var response = '';
+
+                            $.ajax({ type: "POST",   
+                                url: "http://localhost:3000/users/login/vehicle/updateVehicle",  
+                                data: {
+                                    "OldPlate":selected_plate,
+                                    "Vehicle_plate":ed_v_plate,
+                                    "Manufactor":ed_manufactor,
+                                    "Model":ed_model,
+                                    "Color":ed_color,
+                                    "CC":ed_cc,
+                                    "HP":ed_hp
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Vehicle changed successfully"){
+                                        swal({
+                                            title: "Success!",
+                                            text: "Applying changes...\nRestarting page in 5 seconds",
+                                            icon: "success"
+                                        });
+
+                                        document.getElementById("EditVehiclePopupForm").style.display = "none";
+
+                                        setTimeout(function() {
+                                            document.location.reload()
+                                        }, 5000);
+                                    }
+                                    else{
+                                        swal({
+                                            title: "Warning!",
+                                            text: response,
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                error: function(e){
+                                    swal("Error saving vehicle info", {
+                                        icon: "warning",
+                                    });
+                                }
+                            });  
+                        }
+
+                        function findWord() {
+
+                            // Search all columns
+                            $('#keyword').keyup(function(){
+                                // Search Text
+                                var search = $(this).val();
+
+                                // Hide all table tbody rows
+                                $('table tbody tr').hide();
+
+                                // Count total search result
+                                var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+                                if(len > 0){
+                                    // Searching text in columns and show match row
+                                    $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+                                        $(this).closest('tr').show();
+                                    });
+                                }else{
+                                    $('.notfound').show();
+                                }
+                            });
+                        }
+
+                    </script>
+
+                </div>
+
+            </div>
+
+            <div class="newVehiclePopup" id="NewVehiclePopupForm">
+
+                <div class="new_vehicle_container">
+    
+                    <h2 id="new_vehicle_title">Add vehicle</h2>
+    
+                    <div class="a_manufactor">
+                        <input type="text" id="new_manufactor" name="Manufactor" placeholder="Manufactor" value="<%= Vehicle.Manufactor %>" >
+                    </div>
+    
+                    <div class="a_model">
+                        <input type="text" id="new_model" name="Model" placeholder="Model" value="<%= Vehicle.Model %>" >
+                    </div>
+    
+                    <div class="a_v_plate">
+                        <input type="text" id="new_v_plate" name="VehiclePlate" placeholder="Vehicle Plate" value="<%= Vehicle.Vehicle_plate %>" >
+                    </div>
+    
+                    <div class="a_category">
+                        <select id="new_category">
+                            <option value = "<%= Vehicle.Type %>" selected>Car</option>
+                            <option value = "<%= Vehicle.Type %>">Bus</option>
+                            <option value = "<%= Vehicle.Type %>">Motorcycle</option>
+                            <option value = "<%= Vehicle.Type %>">Scooter</option>
+                            <option value = "<%= Vehicle.Type %>">Taxi</option>
+                            <option value = "<%= Vehicle.Type %>">Tractor</option>
+                            <option value = "<%= Vehicle.Type %>">Truck</option>
+                            <option value = "<%= Vehicle.Type %>">Van</option>
+                        </select>
+                    </div>
+    
+                    <div class="a_color">
+                        <input type="text" id="new_color" name="Color" placeholder="Color" value="<%= Vehicle.Color %>" >
+                    </div>
+    
+                    <div class="a_CC">
+                        <input type="text" id="new_cc" name="CC" placeholder="CC" value="<%= Vehicle.CC %>" >
+                    </div>
+    
+                    <div class="a_horse_power">
+                        <input type="text" id="new_hp" name="HorsePower" placeholder="Horse Power" value="<%= Vehicle.HP %>" >
+                    </div>
+    
+                    <div class="a_register_date">
+                        <input type="text" class="new_date-format" id="new_date" placeholder="Date of construction" name="ConDate" />
+                    </div>
+    
+                    <div class="new_vehicle_buttons">
+                        <button id="complete_vehicle_add" onclick="new_vehicle(document.getElementById('new_manufactor').value,document.getElementById('new_model').value,document.getElementById('new_v_plate').value,document.getElementById('new_category').value,document.getElementById('new_color').value,document.getElementById('new_cc').value,document.getElementById('new_hp').value,document.getElementById('new_date').value)">Add vehicle</button> 
+                        <button type="button" id="add_cancel" onclick="newVehicle_close()">Cancel</button>
+                    </div>
+    
+                    <script>
+    
+                        var selected_plate;
+    
+                        function newVehicle(){
+
+                            document.getElementById("NewVehiclePopupForm").style.display = "block";
+                            var isShift = false;
+                            var seperator = "/";
+                        
+                            var inputs = document.getElementsByName('ConDate')
+                    
+                            //Loop through all INPUT elements.
+                            for (var i = 0; i < inputs.length; i++) {
+                                //Check whether the INPUT element is TextBox.
+                                if (inputs[i].type == "text") {
+                                    //Check whether Date Format Validation is required.
+                                    if (inputs[i].className.indexOf("new_date-format") != 1) {
+                                        
+                                        //Set Max Length.
+                                        inputs[i].setAttribute("maxlength", 10);
+                    
+                                        //Only allow Numeric Keys.
+                                        inputs[i].onkeydown = function (e) {
+                                            return IsNumeric(this, e.keyCode);
+                                        };
+                    
+                                    
+                                    }
+                                }
+                            }
+                
+                            function IsNumeric(input, keyCode) {
+                                if (keyCode == 16) {
+                                    isShift = true;
+                                }
+                                //Allow only Numeric Keys.
+                                if (((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode <= 37 || keyCode <= 39 || (keyCode >= 96 && keyCode <= 105)) && isShift == false) {
+                                    if ((input.value.length == 2 || input.value.length == 5) && keyCode != 8) {
+                                        input.value += seperator;
+                                    }
+                                    return true;
+                                }
+                                else {
+                                    return false;
+                                }
+                            };
+
+                        }
+    
+                        function newVehicle_close() {
+                            document.getElementById("NewVehiclePopupForm").style.display = "none";
+                        }
+    
+                        function new_vehicle(n_manufactor, n_model, n_v_plate, n_type, n_color, n_cc, n_hp, n_date) {
+                            var response = '';
+
+                            var e = document.getElementById("new_category");
+                            var type = e.options[e.selectedIndex].text;
+
+                            var userID = sessionStorage.getItem("User_id")
+    
+                            $.ajax({ type: "POST",   
+                                url: "http://localhost:3000/users/register/vehicle/",  
+                                data: {
+                                    "User_id":userID,
+                                    "Manufactor":n_manufactor,
+                                    "Model":n_model,
+                                    "Vehicle_plate":n_v_plate,
+                                    "Type":type,
+                                    "Color":n_color,
+                                    "CC":n_cc,
+                                    "HP":n_hp,
+                                    "Date_of_construction":n_date
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Vehicle has been successfully registered!"){
+                                        swal({
+                                            title: "Success!",
+                                            text: "Applying changes...\nRestarting page in 5 seconds",
+                                            icon: "success"
+                                        });
+    
+                                        document.getElementById("NewVehiclePopupForm").style.display = "none";
+    
+                                        setTimeout(function() {
+                                            document.location.reload()
+                                        }, 5000);
+                                    }
+                                    else{
+                                        swal({
+                                            title: "Warning!",
+                                            text: response,
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                
+                                error: function(e){
+                                    swal("Error saving vehicle info", {
+                                        icon: "warning"
+                                    });
+                                }
+                            });  
+                        }
+                    </script>
+    
+                </div>
+    
+            </div>
+
+            <table id="user_vehicles_table">
+
+                <thead>
+
+                    <tr>
+                        <th> Manufactor </th>
+                        <th> Model </th>
+                        <th> Vehicle plate </th>
+                        <th> Type </th>
+                        <th> Color </th>
+                        <th> CC </th>
+                        <th> Horse power </th>
+                        <th> Construction date </th>
+                        <th> Actions </th>
+                    </tr>
+
+                </thead>
+
+            </table>
+
+        </div>
+
+        <script>
+
+            var userID = sessionStorage.getItem("User_id")
+            var UserVehicleInfo_table = []
+            var UserVehicleSize
+
+            $.ajax({ type: "GET",   
+            url: "/users/login/vehicle/getVehicle/"+userID,
+            success : function(data)
+            {
+                response = data
+
+                var vehicles_data = '';
+
+                UserVehicleInfo_table = new Array(response.length);
+
+                for(var i = 0; i<response.length; i++){
+                    UserVehicleInfo_table[i] = new Array(8);
+                };
+
+                for (let i = 0; i < response.length; i++) {
+
+                    UserVehicleInfo_table[i][0] = i
+                    UserVehicleInfo_table[i][1] = response[i].User_id
+                    UserVehicleInfo_table[i][2] = response[i].Manufactor
+                    UserVehicleInfo_table[i][3] = response[i].Model
+                    UserVehicleInfo_table[i][4] = response[i].Vehicle_plate
+                    UserVehicleInfo_table[i][5] = response[i].Color
+                    UserVehicleInfo_table[i][6] = response[i].CC
+                    UserVehicleInfo_table[i][7] = response[i].HP
+
+                    vehicles_data += '<tbody>';
+
+                    vehicles_data += '<tr>';
+
+                    vehicles_data += '<td>' + response[i].Manufactor + '</td>';
+
+                    vehicles_data += '<td>' + response[i].Model + '</td>';
+
+                    vehicles_data += '<td>' + response[i].Vehicle_plate + '</td>';
+
+                    vehicles_data += '<td>' + response[i].Type + '</td>';
+
+                    vehicles_data += '<td>' + response[i].Color + '</td>';
+
+                    vehicles_data += '<td>' + response[i].CC + '</td>';
+
+                    vehicles_data += '<td>' + response[i].HP + '</td>';
+
+                    vehicles_data += '<td>' + response[i].Date_of_construction + '</td>';
+
+                    vehicles_data += '<td>' + '<input id="edit" type="button" onclick="editVehicle(this)">' + '<input id="delete" type="button" onclick="deleteVehicle(this)">' + '</td>';
+
+                    vehicles_data += '</tr>';
+
+                    vehicles_data += '</tbody>';
+
+                }
+
+                UserVehicleSize = response.length;
+                document.getElementById("counter").innerHTML = "Number of vehicles: " + UserVehicleSize
+
+                $("#user_vehicles_table").append(vehicles_data); 
+                
+            },
+            error: function(e){
+                swal("Error fetching vehicle info", {
+                    icon: "warning",
+                });
+            }
+            });
+            
+            function deleteVehicle(r)
+            {
+                var i = r.parentNode.parentNode.rowIndex;
+                var selected_id,selected_user_id,selected_plate;
+
+                for(var z=0; z<UserVehicleInfo_table.length; z++)
+                {
+                    if(UserVehicleInfo_table[z][0]==i-1)
+                    {
+
+                        selected_id = UserVehicleInfo_table[z][0];
+                        selected_user_id = UserVehicleInfo_table[z][1];
+                        selected_plate = UserVehicleInfo_table[z][4];
+                                
+                        $.ajax({ type: "GET",   
+                        url: "/users/login/vehicle/counter/"+selected_user_id,
+                        success : function(text)
+                        {
+                            response = text
+
+                            if (response<=1)
+                            {
+                                swal({
+                                    title: "Minimum number of vehicles detected!",
+                                    text: "You must have at least one vehicle",
+                                    icon: "error",
+                                    buttons: true,
+                                    dangerMode: true,
+                                    })
+                            }
+                            else{
+                                swal({
+                                title: "Are you sure?",
+                                text: "Once deleted, this operation can't be reverted!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                                })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                        
+                                        $.ajax({ type: "DELETE",   
+                                        url: "/users/login/vehicle/deleteVehicle/",
+                                            data: {
+                                                "Vehicle_plate":selected_plate
+                                            },
+                                            dataType:"text",
+                                            success: function(data){
+                                            }
+                                        })
+
+                                        UserVehicleInfo_table.splice(selected_id, 1);
+
+                                        UserVehicleSize = UserVehicleInfo_table.length;
+                                        document.getElementById("counter").innerHTML = "Number of vehicles: " + UserVehicleSize
+
+                                        for(var q=0; q<UserVehicleInfo_table.length; q++){
+                                            UserVehicleInfo_table[q][0] = q;
+                                        }
+
+                                        document.getElementById("user_vehicles_table").deleteRow(i);
+
+                                        swal("Vehicle has been deleted successfully!", {
+                                            icon: "success",
+                                        });
+                                    }
+                                });     
+                            }
+                        }  
+                        })
+                    }
+                }
+            } 
+
+        </script>
+
+    </body>
+
+</html>

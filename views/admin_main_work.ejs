@@ -1,0 +1,173 @@
+<div class="admin_main">
+
+    <div class="admin_top">
+
+        <div class="admin_nav_info">
+            <input type="image"  id="admin_app_icon" src="/icons/icon.png" alt="image error" onClick="window.location.reload();"></button>
+            <p id="admin_welcome">Welcome to Navigator</p>
+        </div>
+
+        <div class="admin_nav_username_dropdown">
+            <button onclick="dropdown_menu()" class="admin_username_button" id="admin_username"></button>
+
+            <div id="username_dropdown" class="dropdown-content">
+                <button id="acc">My account</button> 
+                <button id="veh">My vehicles</button>
+                <button id="logout">Logout</button> 
+            </div>
+        </div>
+
+    </div>
+
+    <div class="admin_down">
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+        <script
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+        <script>
+
+            function dropdown_menu() {
+                document.getElementById("username_dropdown").classList.toggle("show");
+            }
+
+            window.onclick = function(event) {
+                if (!event.target.matches('.admin_username_button')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+
+            var mail = sessionStorage.getItem("Email")
+
+            $.ajax({ type: "GET",   
+                    url: "/users/login/getID/"+mail,
+                    dataType:"text",
+                    success : function(text)
+                    {
+                        response = text
+
+                        if(response.startsWith("{")){
+                            
+                            var myArray = response.toString().split(':');
+                            var myArray2 = myArray[1].toString().replaceAll("\"","")
+                            var userID = myArray2.toString().replace("}","")
+
+                            $.ajax({ type: "GET",   
+                                url: "/users/login/username/"+userID,
+                                success : function(text)
+                                {
+                                    response = text
+
+                                    firstName = response.FirstName
+                                    lastName = response.LastName
+
+                                    sessionStorage.setItem("User_id", userID);
+
+                                    document.getElementById("admin_username").innerHTML = firstName + " " + lastName
+                                },
+                                error: function(e){
+                                    swal({
+                                        title: "Error!",
+                                        text: "Error fetching users info",
+                                        icon: "error",
+                                        button: "OK",
+                                    });
+                                }
+                            });
+                        }
+                        
+                    },
+                    error: function(e){
+                        swal({
+                            title: "Error!",
+                            text: "Error fetching users info",
+                            icon: "error",
+                            button: "OK",
+                        });
+                    }
+                });
+
+
+            $(document).ready(function(){
+                $("button").click(function(){
+                    if(this.id==="acc"){
+                        $("#template").load("/users/login/getOne");
+                    }
+                    else if(this.id==="veh"){
+                        $("#template").load("/users/login/vehicle/getOne");
+                    }
+                    else if(this.id==="mis"){
+                        $("#template").load("/users/login/stats/missions/get/getOne");
+                    }
+                    else if(this.id==="users_all"){
+                        $("#template").load("/users/login/getAll");
+                    }
+                    else if(this.id==="veh_all"){
+                        $("#template").load("/users/login/vehicle/getAll");
+                    }
+                    else if(this.id==="mis_all"){
+                        $("#template").load("/users/login/stats/missions/get/getAll");
+                    }
+                    else if(this.id==="logout")
+                    {
+                        swal({
+                            title: "Are you sure you want to logout?",
+                            icon: "info",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                sessionStorage.clear();
+                    
+                                    var timer = setTimeout(function() {
+                                        window.location='/users/logout'
+                                    }, 500);
+                            }
+                        });
+                    }
+                });
+            });
+            </script>
+
+        <div class="admin_sidebar">
+            <button id="mis">My missions</button> 
+            <button id="users_all">Users</button> 
+            <button id="veh_all">Vehicles</button>
+            <button id="mis_all">Missions</button>
+
+        </div>
+
+        <div class="admin_main_work" id="template">
+
+            <div class="my_missions_class">
+                <p id="my_missions_tip"> Click 'My missions' tab to check your missions</p>
+            </div>
+            <div class="users_class">
+                <p id="users_tip"> Click 'Users' tab to check all users info</p>
+            </div>
+            <div class="vehicles_class">
+                <p id="vehicles_tip"> Click 'Vehicles' tab to see all vehicles</p>
+            </div>
+            <div class="missions_class">
+                <p id="missions_tip"> Click 'Missions' tab to check all missions of all users</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,161 @@
+<div class="user_register">
+
+    <div class="register_user_info">
+
+        <p id="welcome"> Welcome to registration page!</p>
+        <img id="user_register_tip_icon" src="/icons/tips.png" alt="image error">
+        <p id="user_register_tip">Useful tips</p>
+
+        <div class="c_register_fname_tip">
+
+            <label id="fname_tip_label"> First Name: </label>
+            <p id="fname_tip">Must have only characters </p>
+
+        </div>
+
+        <div class="c_register_lname_tip">
+
+            <label id="lname_tip_label"> Last Name: </label>
+            <p id="lname_tip"> Must have only characters </p>
+
+        </div>
+
+        <div class="c_register_userType_tip">
+
+            <label id="userType_tip_label"> Account Type: </label>
+            <p id="userType_tip"> You can choose between simple user or system administrator </p>
+
+        </div>
+
+        <div class="c_register_email_tip">
+
+            <label id="email_tip_label"> Email: </label>
+            <p id="email_tip"> Correct email form : example@hotmail.com </p>
+
+        </div>
+
+        <div class="c_register_password_tip">
+
+            <label id="password_tip_label"> Password: </label>
+            <p id="password_tip"> Must have minimum 7 and maximum 14 characters </p>
+
+        </div>
+
+        <div class="c_register_confirm_tip">
+
+            <label id="confirm_tip_label"> Confirm Password: </label>
+            <p id="confirm_tip"> Must match with Password field </p>
+
+        </div>
+
+        <div class="c_register_pin_tip">
+
+            <label id="pin_tip_label"> Recovery PIN: </label>
+            <p id="pin_tip"> In case you forgot your password <br> (4 digits)</p>
+
+        </div>
+
+    </div>
+
+    <div class="register_user_frame">
+
+        <div class="user_logo">
+            <img id="user_img" src="/icons/user.png" alt="" />
+        </div>
+    
+        <h1>User info</h1>
+        
+        <div class="c_register_fname">
+            <label id="fname_label"> First Name </label>
+            <input type="text" name="FirstName" id="fname" value="<%= User.FirstName %>" >
+        </div>
+
+        <div class="c_register_lname">
+            <label id="lname_label"> Last Name </label>
+            <input type="text" name="LastName" id="lname" value="<%= User.LastName %>" >
+        </div>
+
+        <div class="c_register_userType">
+            <label id="account_type_label"> Account Type </label>
+            <select id="type">
+                <option value = "<%= User.Account_type %>" selected>User</option>
+                <option value = "<%= User.Account_type %>">Administrator</option>
+            </select>
+        </div>
+
+        <div class="c_register_email">
+            <label id="mail_label"> Email </label>
+            <input type="email" name="Email" id="email" value="<%= User.Email %>" >
+        </div>
+
+        <div class="c_register_password">
+            <label id="pass_label"> Password </label>
+            <input type="password" name="Password" id="pass" value="<%= User.Password %>" >
+        </div>
+
+        <div class="c_register_confirm">
+            <label id="pass2_label"> Confirm Password </label>
+            <input type="password" name="Confirm_password" id="pass2" value="<%= User.Confirm_password %>" >
+        </div>
+
+        <div class="c_register_pin">
+            <label id="pin_label"> Recovery PIN </label>
+            <input type="text" name="recovery_pin" id="pin" maxlength="4" value="<%= User.Recovery_PIN %>" >
+        </div>
+
+        <div class="c_register_next">
+
+            <button id="register_next" onclick="user_register_data(document.getElementById('fname').value,document.getElementById('lname').value,document.getElementById('type').value,document.getElementById('email').value,document.getElementById('pass').value,document.getElementById('pass2').value,document.getElementById('pin').value)">Next</button> 
+
+            <script>
+
+                function user_register_data(fname, lname, type, email, pass, pass2, pin) {
+                    var response = '';
+                    var e = document.getElementById("type");
+				    var type = e.options[e.selectedIndex].text;
+
+                    $.ajax({ type: "POST",   
+                        url: "http://localhost:3000/users/register",  
+                        data: {
+                            "FirstName":fname,
+                            "LastName":lname,
+                            "Account_Type":type,
+                            "Email":email,
+                            "Password":pass,
+                            "Confirm_password":pass2,
+                            "Recovery_PIN":pin
+                        },
+                        dataType:"text",
+                        async: false,
+                        success : function(text)
+                        {
+                            response=text
+                            if(response=="User has been successfully registered!"){
+                                sessionStorage.setItem("Register_email", email);
+                                
+                                var final_url = "http://localhost:3000/users/register/vehicle";
+                                window.location.replace(final_url);
+                            }
+                            else{
+                                swal({
+                                    title: "Warning!",
+                                    text: response,
+                                    icon: "error"
+                                });
+                            }
+                        },
+                        error: function(e){
+                            swal("Error saving users info", {
+                                icon: "warning",
+                            });
+                        }
+                    });
+                }
+
+            </script>
+
+        </div>
+
+    </div>
+
+</div>

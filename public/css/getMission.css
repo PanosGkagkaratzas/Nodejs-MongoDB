@@ -1,0 +1,90 @@
+.missionInfo {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.missionInfo thead th {
+    position: relative;
+    top: 0;
+}
+
+.missionInfo #keyword{
+    background-image: url('/icons/search.png');
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 6%;
+    text-indent: 6%;
+    width: 30%;
+    height: 5%;
+    font-size: 16px;
+    border: 1px solid #ddd;
+}
+
+.missionInfo #counter{
+    height: 0px;
+    float: right;
+    font-size: 20px;
+    color: black;
+    padding-right: 2%;
+}
+
+table {
+    background-color: white;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+}
+
+th{
+    width: 10%;
+    height: 10%;
+    color: white;
+    border: 1px solid black;
+    background-color: darkslateblue;
+    font-size: x-large;
+}
+
+td{
+    width: 10%;
+    height: 20%;
+    border: 1px solid black;
+    font-size: larger;
+    font-style: italic;
+}
+
+table #map{
+    margin-left: 20%;
+    background-image: url('/icons/map.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: left;
+    border: none;
+}
+
+table #delete{
+    margin-right: 20%;
+    background-image: url('/icons/delete.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: right;
+    border: none;
+}
+
+table #map:hover{
+    background-color: gray;
+}
+
+table #delete:hover{
+    background-color: gray;
+}

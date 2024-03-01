@@ -1,0 +1,821 @@
+body{
+    background-color: orange;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: blue;
+}
+
+.user_register{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.register_user_info{
+    width: 600px;
+    height: 650px;
+    margin-top: 100px;
+    margin-left: 300px;
+    position:relative;
+    float: left;
+    text-align: center;
+}
+
+.register_user_info #welcome{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-decoration: underline;
+}
+
+.register_user_info #user_register_tip_icon{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-left: 200px;
+}
+
+.register_user_info #user_register_tip{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 30px;
+    color: red;
+    width: 400px;
+    height: 40px;
+    padding-top: 5px;
+}
+
+.c_register_fname_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_fname_tip #fname_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_fname_tip #fname_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_lname_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_lname_tip #lname_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_lname_tip #lname_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_userType_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_userType_tip #userType_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_userType_tip #userType_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_email_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_email_tip #email_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_email_tip #email_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_password_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_password_tip #password_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_password_tip #password_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_confirm_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_confirm_tip #confirm_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_confirm_tip #confirm_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.c_register_pin_tip{
+    text-align: start;
+    width: 600px;
+    height: 40px;
+}
+
+.c_register_pin_tip #pin_tip_label{
+    width: 212px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: black;
+    float: left;
+}
+
+.c_register_pin_tip #pin_tip{
+    width: 388px;
+    margin-left: 212px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.register_user_frame{
+    width: 600px;
+    height: 650px;
+    border: 5px solid transparent;
+    border-top-left-radius: 80px 350px;
+    border-bottom-left-radius: 80px 350px;
+    background-color: white;
+    margin-top: 100px;
+    margin-left: 1000px;
+    position:relative;
+}
+
+.user_logo{
+    height: 70px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user_logo #user_img{
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgb(156, 5, 5);
+    border-radius: 50px;
+}
+
+.c_register_fname{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+}
+
+.c_register_fname #fname_label{
+    width: 220px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 8px;
+}
+
+.c_register_fname #fname{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_lname{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 20px;
+}
+
+.c_register_lname #lname_label{
+    width: 220px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 8px;
+}
+
+.c_register_lname #lname{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_userType{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 40px;
+}
+
+.c_register_userType #account_type_label{
+    width: 220px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 8px;
+}
+
+.c_register_userType #type{
+    height: 36px;
+    width: 208px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_email{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 60px;
+}
+
+.c_register_email #mail_label{
+    width: 220px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 8px;
+}
+
+.c_register_email #email{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_password{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 80px;
+}
+
+.c_register_password #pass_label{
+    width: 220px;
+    height: 25px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+    padding-top: 8px;
+}
+
+.c_register_password #pass{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_confirm{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 100px;
+}
+
+.c_register_confirm #pass2_label{
+    width: 220px;
+    height: 25px;
+    padding-top: 8px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+}
+
+.c_register_confirm #pass2{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_pin{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 120px;
+}
+
+.c_register_pin #pin_label{
+    width: 220px;
+    height: 25px;
+    padding-top: 8px;
+    position: absolute;
+    left: 50px;
+    font-family: "Monaco", monospace;
+    text-align: start;
+    font-size: 25px;
+}
+
+.c_register_pin #pin{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    left: 300px;
+    font-size: 18px;
+}
+
+.c_register_next{
+    width: 600px;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    top: 200px;
+}
+
+.c_register_next #register_next{
+    width: 200px;
+    height: 50px;
+    margin-left: 220px;
+    border-radius: 12px;
+    font-size: 22px;
+    background-color: blue;
+    color: white;
+}
+
+@media all and (max-width:1680px){
+    .register_user_info{
+        margin-top: 120px;
+        margin-left: 170px;
+    }
+    
+    .register_user_frame{
+        margin-top: 120px;
+        margin-left: 850px;
+    }
+}
+
+@media all and (max-width:1600px){
+    .register_user_info{
+        margin-top: 50px;
+        margin-left: 150px;
+    }
+    
+    .register_user_frame{
+        margin-top: 50px;
+        margin-left: 820px;
+    }
+}
+
+@media all and (max-width:1440px){
+    .register_user_info{
+        margin-top: 50px;
+        margin-left: 60px;    
+    }
+    
+    .register_user_frame{
+        margin-top: 50px;
+        margin-left: 730px;
+    }
+}
+
+@media all and (max-width:1366px){
+    .register_user_info{
+        width: 500px;
+        height: 600px;
+        margin-top: 20px;
+        margin-left: 120px;
+    }
+    
+    .register_user_info #welcome{
+        font-size: 30px;
+    }
+    
+    .register_user_info #user_register_tip_icon{
+        width: 35px;
+        height: 35px;
+        margin-left: 145px;
+    }
+    
+    .register_user_info #user_register_tip{
+        font-size: 24px;
+        width: 300px;
+        height: 35px;
+    }
+    
+    .c_register_fname_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_fname_tip #fname_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_fname_tip #fname_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_lname_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_lname_tip #lname_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_lname_tip #lname_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_userType_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_userType_tip #userType_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_userType_tip #userType_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_email_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_email_tip #email_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_email_tip #email_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_password_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_password_tip #password_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_password_tip #password_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .c_register_confirm_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_confirm_tip #confirm_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_confirm_tip #confirm_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+
+    .c_register_pin_tip{
+        width: 500px;
+        height: 35px;
+    }
+    
+    .c_register_pin_tip #pin_tip_label{
+        width: 180px;
+        height: 25px;
+        font-size: 20px;
+    }
+    
+    .c_register_pin_tip #pin_tip{
+        width: 320px;
+        margin-left: 180px;
+        height: 25px;
+        font-size: 17px;
+    }
+    
+    .register_user_frame{
+        width: 500px;
+        height: 600px;
+        margin-top: 20px;
+        margin-left: 700px;
+    }
+    
+    .user_logo{
+        height: 35px;
+        margin-top: 5px;
+    }
+    
+    .user_logo #user_img{
+        width: 40px;
+        height: 40px;
+    }
+
+    h1{
+        font-size: 25px;
+    }
+    
+    .c_register_fname{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_fname #fname_label{
+        width: 200px;
+        height: 25px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_fname #fname{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_lname{
+        width: 500px;
+        height: 25px;
+        top: 20px;
+    }
+    
+    .c_register_lname #lname_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_lname #lname{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_userType{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_userType #account_type_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_userType #type{
+        height: 32px;
+        width: 188px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_email{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_email #mail_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_email #email{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_password{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_password #pass_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_password #pass{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_confirm{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_confirm #pass2_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_confirm #pass2{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+
+    .c_register_pin{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_pin #pin_label{
+        width: 200px;
+        padding-top: 5px;
+        font-size: 22px;
+    }
+    
+    .c_register_pin #pin{
+        height: 25px;
+        width: 180px;
+        left: 280px;
+        font-size: 15px;
+    }
+    
+    .c_register_next{
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_next #register_next{
+        margin-left: 280px;
+    }
+}
+
+@media all and (max-width:1280px){
+    .register_user_info{
+        width: 500px;
+        height: 600px;
+        margin-top: 150px;
+        margin-left: 100px;
+    }
+    
+    .register_user_frame{
+        width: 500px;
+        height: 600px;
+        margin-top: 150px;
+        margin-left: 650px;
+    }
+}

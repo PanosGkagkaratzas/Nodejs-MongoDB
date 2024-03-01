@@ -1,0 +1,284 @@
+body{
+    background-color: darkslateblue;
+}
+
+.user_main{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.user_top{
+    position:relative;
+    width: 100%;
+    height: 20%;
+}
+
+.user_nav_info{
+    height: 100%;
+    width: 60%;
+    position:relative;
+    float: left;
+}
+
+.user_nav_info #user_app_icon{
+    width: 13%;
+    height: 70%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.user_nav_info #user_welcome{
+    width: 80%;
+    height: 90%;
+    float: right;
+    font-size: 400%;
+    font-style: italic;
+    color: white;
+}
+
+.user_nav_username_dropdown {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    float: right;
+}
+
+.user_username_button {
+    background-image: url('/icons/user_main.png');
+    background-position-y: center;
+    background-position-x: 90%;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color: white;
+    text-indent: 4%;
+    width: 30%;
+    min-width: 40%;
+    padding-right: 50px;
+    height: 30%;
+    float: right;
+    text-align: center;
+    padding-left: 2%;
+    font-size: 140%;
+    border: none;
+    cursor: pointer;
+}
+  
+.user_username_button:hover, .user_username_button:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+    margin-top: 7.6%;
+    margin-left: 70%;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 30%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black;
+    text-decoration: none;
+    display: block;
+    border: none;
+    font-size: large;
+    width: 100%;
+    padding: 5%;
+}
+
+.user_nav_username_dropdown button:hover {
+    display: block;
+    background-color: gray;
+    color: white;
+}
+
+.show {
+    display: block;
+}
+
+.user_down{
+    position:relative;
+    width: 100%;
+    height: 80%;
+}
+
+.user_sidebar{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.user_sidebar #acc{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+}
+
+.user_sidebar #acc:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.user_sidebar #veh{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.user_sidebar #veh:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.user_sidebar #mis{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.user_sidebar #mis:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.user_main_work{
+    width: 80%;
+    height: 100%;
+    float: right;
+    background-color: white;
+}
+
+.my_account_class{
+    height: 5%;
+}
+
+.my_account_class #my_account_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.my_vehicle_class{
+    height: 5%;
+}
+
+.my_vehicle_class #my_vehicle_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.my_missions_class{
+    height: 5%;
+}
+
+.my_missions_class #my_missions_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.logout_class{
+    height: 5%;
+}
+
+.logout_class #logout_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+    padding-left: 2%;
+}
+
+@media all and (max-width:1680px){
+    .user_nav_username #user_username{
+        font-size: 140%;  
+    }
+}
+
+@media all and (max-width:1600px){
+    .user_nav_info #user_app_icon{
+        width: 12%;
+        height: 68%;
+    }
+    
+    .user_nav_info #user_welcome{
+        font-size: 350%;
+    }
+
+    .user_nav_username #user_username{
+        font-size: 130%;  
+    }
+}
+
+@media all and (max-width:1440px){
+    .user_nav_username #user_username{
+        font-size: 120%;  
+    }
+}
+
+@media all and (max-width:1366px){
+    .user_nav_info #user_app_icon{
+        width: 11%;
+        height: 66%;
+    }
+    
+    .user_nav_info #user_welcome{
+        font-size: 290%;
+    }
+
+    .user_nav_username #user_username{
+        font-size: 105%;  
+    }
+
+    .user_sidebar #acc{
+        font-size: 150%;
+    }
+    
+    .user_sidebar #veh{
+        font-size: 150%;
+    }
+    
+    .user_sidebar #mis{
+        font-size: 150%;   
+    }
+}
+
+@media all and (max-width:1280px){
+    .user_nav_info #user_app_icon{
+        width: 15%;
+    }
+
+    .user_nav_username #user_username{
+        font-size: 125%;  
+    }
+}

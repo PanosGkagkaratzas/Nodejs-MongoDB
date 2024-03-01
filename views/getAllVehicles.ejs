@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link rel="stylesheet" href="/css/getAllVehicles.css">
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <script
+            scr="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+            
+        <div class="AllVehiclesInfo">
+
+            <input type="text" id="keyword" onkeyup="findWord()" placeholder="Search">
+            <p id="counter"></p>
+
+            <div class="editVehiclePopup" id="EditVehiclePopupForm">
+
+                <div class="edit_vehicle_container">
+
+                    <h2 id="edit_vehicle_title">Edit vehicle info</h2>
+
+                    <div class="e_manufactor">
+                        <input type="text" id="edit_manufactor" name="Manufactor" value="<%= Vehicle.Manufactor %>" >
+                    </div>
+
+                    <div class="e_model">
+                        <input type="text" id="edit_model" name="Model" value="<%= Vehicle.Model %>" >
+                    </div>
+
+                    <div class="e_v_plate">
+                        <input type="text" id="edit_v_plate" name="VehiclePlate" value="<%= Vehicle.Vehicle_plate %>" >
+                    </div>
+
+                    <div class="e_color">
+                        <input type="text" id="edit_color" name="Color" value="<%= Vehicle.Color %>" >
+                    </div>
+
+                    <div class="e_CC">
+                        <input type="text" id="edit_cc" name="CC" value="<%= Vehicle.CC %>" >
+                    </div>
+
+                    <div class="e_horse_power">
+                        <input type="text" id="edit_hp" name="HorsePower" value="<%= Vehicle.HP %>" >
+                    </div>
+
+                    <div class="edit_vehicle_buttons">
+                        <button id="complete_vehicle_edit" onclick="edit_vehicle(document.getElementById('edit_v_plate').value,document.getElementById('edit_manufactor').value,document.getElementById('edit_model').value,document.getElementById('edit_color').value,document.getElementById('edit_cc').value,document.getElementById('edit_hp').value)">Confirm changes</button> 
+                        <button type="button" id="edit_cancel" onclick="editVehicle_close()">Cancel</button>
+                    </div>
+
+                    <script>
+
+                        var selected_plate;
+
+                        function editVehicle(r) {
+                            var i = r.parentNode.parentNode.rowIndex;
+
+                            for(var z=0; z<AllUsersVehicleInfo_table.length; z++)
+                            {
+
+                                if(AllUsersVehicleInfo_table[z][0]==i-1)
+                                {
+                                    selected_plate = AllUsersVehicleInfo_table[z][4];
+
+                                    document.querySelector('[name="Manufactor"]').value = AllUsersVehicleInfo_table[z][2];
+                                    document.querySelector('[name="Model"]').value = AllUsersVehicleInfo_table[z][3];
+                                    document.querySelector('[name="VehiclePlate"]').value = AllUsersVehicleInfo_table[z][4];
+                                    document.querySelector('[name="Color"]').value = AllUsersVehicleInfo_table[z][5];
+                                    document.querySelector('[name="CC"]').value = AllUsersVehicleInfo_table[z][6];
+                                    document.querySelector('[name="HorsePower"]').value = AllUsersVehicleInfo_table[z][7];
+                                }
+                            }
+
+                            document.getElementById("EditVehiclePopupForm").style.display = "block";
+                        }
+
+                        function editVehicle_close() {
+                            document.getElementById("EditVehiclePopupForm").style.display = "none";
+                        }
+
+                        function edit_vehicle(ed_v_plate, ed_manufactor, ed_model, ed_color, ed_cc, ed_hp) {
+                            var response = '';
+
+                            $.ajax({ type: "POST",   
+                                url: "http://localhost:3000/users/login/vehicle/updateVehicle",  
+                                data: {
+                                    "OldPlate":selected_plate,
+                                    "Vehicle_plate":ed_v_plate,
+                                    "Manufactor":ed_manufactor,
+                                    "Model":ed_model,
+                                    "Color":ed_color,
+                                    "CC":ed_cc,
+                                    "HP":ed_hp
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Vehicle changed successfully"){
+                                        swal({
+                                            title: "Success!",
+                                            text: "Applying changes...\nRestarting page in 5 seconds",
+                                            icon: "success"
+                                        });
+
+                                        //var mail = sessionStorage.getItem("Email")
+                                        //sessionStorage.setItem("Email", mail);
+                                       // sessionStorage.setItem("Plate", ed_v_plate);
+
+                                        document.getElementById("EditVehiclePopupForm").style.display = "none";
+
+                                        setTimeout(function() {
+                                            document.location.reload()
+                                        }, 5000);
+                                    }
+                                    else{
+                                        swal({
+                                            title: "Warning!",
+                                            text: response,
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                error: function(e){
+                                    swal("Error saving vehicle info", {
+                                        icon: "warning",
+                                    });
+                                }
+                            });  
+                        }
+
+                    </script>
+
+                </div>
+
+            </div>
+
+            <table id="all_users_vehicles_table">
+
+                <thead>
+
+                    <tr>
+                        <th> Manufactor </th>
+                        <th> Model </th>
+                        <th> Vehicle plate </th>
+                        <th> Type </th>
+                        <th> Color </th>
+                        <th> CC </th>
+                        <th> Horse power </th>
+                        <th> Construction date </th>
+                        <th> Actions </th>
+                    </tr>
+
+                </thead>
+
+            </table>
+
+        </div>
+        
+            <script>
+
+                var AllUsersVehicleInfo_table = []
+                var AllUsersVehicleSize
+
+                $.ajax({ type: "GET",   
+                    url: "/users/login/vehicle/totalVehicles",
+                    success: function(data){
+                    
+                        response = data
+                        var vehicles_data = '';
+
+                        AllUsersVehicleInfo_table = new Array(response.length);
+
+                        for(var i = 0; i<response.length; i++){
+                            AllUsersVehicleInfo_table[i] = new Array(8);
+                        };
+
+                        for (let i = 0; i < response.length; i++) {
+
+                            AllUsersVehicleInfo_table[i][0] = i
+                            AllUsersVehicleInfo_table[i][1] = response[i].User_id
+                            AllUsersVehicleInfo_table[i][2] = response[i].Manufactor
+                            AllUsersVehicleInfo_table[i][3] = response[i].Model
+                            AllUsersVehicleInfo_table[i][4] = response[i].Vehicle_plate
+                            AllUsersVehicleInfo_table[i][5] = response[i].Color
+                            AllUsersVehicleInfo_table[i][6] = response[i].CC
+                            AllUsersVehicleInfo_table[i][7] = response[i].HP
+
+                            vehicles_data += '<tbody>';
+
+                            vehicles_data += '<tr>';
+
+                            vehicles_data += '<td>' + response[i].Manufactor + '</td>';
+
+                            vehicles_data += '<td>' + response[i].Model + '</td>';
+
+                            vehicles_data += '<td>' + response[i].Vehicle_plate + '</td>';
+
+                            vehicles_data += '<td>' + response[i].Type + '</td>';
+
+                            vehicles_data += '<td>' + response[i].Color + '</td>';
+
+                            vehicles_data += '<td>' + response[i].CC + '</td>';
+
+                            vehicles_data += '<td>' + response[i].HP + '</td>';
+
+                            vehicles_data += '<td>' + response[i].Date_of_construction + '</td>';
+
+                            vehicles_data += '<td>' + '<input id="edit" type="button" onclick="editVehicle(this)">' + '<input id="delete" type="button" onclick="deleteVehicle(this)">' + '</td>';
+
+                            vehicles_data += '</tr>';
+
+                            vehicles_data += '</tbody>';
+
+                        }
+
+                        AllUsersVehicleSize = response.length;
+                        document.getElementById("counter").innerHTML = "Number of vehicles: " + AllUsersVehicleSize
+
+                        $("#all_users_vehicles_table").append(vehicles_data); 
+                        
+                    }
+                });
+                
+                function deleteVehicle(r)
+                {
+                    var i = r.parentNode.parentNode.rowIndex;
+                    var selected_id,selected_user_id,selected_plate;
+
+                    for(var z=0; z<AllUsersVehicleInfo_table.length; z++)
+                    {
+                        if(AllUsersVehicleInfo_table[z][0]==i-1)
+                        {
+
+                            selected_id = AllUsersVehicleInfo_table[z][0];
+                            selected_user_id = AllUsersVehicleInfo_table[z][1];
+                            selected_plate = AllUsersVehicleInfo_table[z][4];
+                                    
+                            $.ajax({ type: "GET",   
+                            url: "/users/login/vehicle/counter/"+selected_user_id,
+                            success : function(text)
+                            {
+                                response = text
+
+                                if (response<=1)
+                                {
+                                    swal({
+                                        title: "Minimum number of vehicles detected!",
+                                        text: "You must have at least one vehicle",
+                                        icon: "error",
+                                        buttons: true,
+                                        dangerMode: true,
+                                        })
+                                }
+                                else{
+                                    swal({
+                                    title: "Are you sure?",
+                                    text: "Once deleted, this operation can't be reverted!",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                    })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                            
+                                            $.ajax({ type: "DELETE",   
+                                                url: "/users/login/vehicle/deleteVehicle/",
+                                                data: {
+                                                    "Vehicle_plate":selected_plate
+                                                },
+                                                dataType:"text",
+                                                success: function(data){
+                                                }
+                                            })
+
+                                            AllUsersVehicleInfo_table.splice(selected_id, 1);
+
+                                            UserVehicleSize_table    = AllUsersVehicleInfo_table.length;
+                                            document.getElementById("counter").innerHTML = "Number of vehicles: " + UserVehicleSize_table
+
+                                            for(var q=0; q<AllUsersVehicleInfo_table.length; q++){
+                                                AllUsersVehicleInfo_table[q][0] = q;
+                                            }
+
+                                            document.getElementById("all_users_vehicles_table").deleteRow(i);
+
+                                            swal("Vehicle has been deleted successfully!", {
+                                                icon: "success",
+                                            });
+                                        }
+                                    });     
+                                }
+                            }  
+                            })
+                        }
+                    }
+                }
+               
+            </script>
+
+    </body>
+
+</html>

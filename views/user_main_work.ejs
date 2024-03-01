@@ -1,0 +1,161 @@
+<div class="user_main">
+
+    <div class="user_top">
+
+        <div class="user_nav_info">
+            <input type="image"  id="user_app_icon" src="/icons/icon.png" alt="image error" onClick="window.location.reload();"></button>
+            <p id="user_welcome">Welcome to Navigator</p>
+        </div>
+
+        <div class="user_nav_username_dropdown">
+            <button onclick="dropdown_menu()" class="user_username_button" id="user_username"></button>
+
+            <div id="username_dropdown" class="dropdown-content">
+                <button id="logout">Logout</button> 
+            </div>
+        </div>
+
+    </div>
+
+    <div class="user_down">
+
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+
+        <script>
+
+            function dropdown_menu() {
+                document.getElementById("username_dropdown").classList.toggle("show");
+            }
+
+            window.onclick = function(event) {
+                if (!event.target.matches('.user_username_button')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+
+        </script>
+
+        <script>
+
+            var mail = sessionStorage.getItem("Email")
+
+            $.ajax({ type: "GET",   
+                    //url: "/users/login/getPlate/"+mail,
+                    url: "/users/login/getID/"+mail,
+                    dataType:"text",
+                    success : function(text)
+                    {
+                        response = text
+
+                        if(response.startsWith("{")){
+                            
+                            var myArray = response.toString().split(':');
+                            var myArray2 = myArray[1].toString().replaceAll("\"","")
+                            var userID = myArray2.toString().replace("}","")
+
+                            $.ajax({ type: "GET",   
+                                url: "/users/login/username/"+userID,
+                                success : function(text)
+                                {
+                                    response = text
+
+                                    firstName = response.FirstName
+                                    lastName = response.LastName
+
+                                    sessionStorage.setItem("User_id", userID);
+
+                                    document.getElementById("user_username").innerHTML = firstName + " " + lastName
+                                },
+                                error: function(e){
+                                    swal({
+                                        title: "Error!",
+                                        text: "Error fetching users info",
+                                        icon: "error",
+                                        button: "OK",
+                                    });                                
+                                }
+                            });
+                        }
+                        
+                    },
+                    error: function(e){
+                        swal({
+                            title: "Error!",
+                            text: "Error fetching users info",
+                            icon: "error",
+                            button: "OK",
+                        });                    
+                    }
+                });
+
+
+            $(document).ready(function(){
+                $("button").click(function(){
+                    if(this.id==="acc"){
+                        $("#template").load("/users/login/getOne");
+                    }
+                    else if(this.id==="veh"){
+                        $("#template").load("/users/login/vehicle/getOne");
+                    }
+                    else if(this.id==="mis"){
+                        $("#template").load("/users/login/stats/missions/get/getOne");
+                    }
+                    else if(this.id==="logout")
+                    {
+                        swal({
+                            title: "Are you sure you want to logout?",
+                            icon: "info",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                sessionStorage.clear();
+                    
+                                    var timer = setTimeout(function() {
+                                        window.location='/users/logout'
+                                    }, 500);
+                            }
+                        });
+                    }
+                });
+            });
+            </script>
+
+        <div class="user_sidebar">
+            <button id="acc">My account</button> 
+            <button id="veh">My vehicles</button> 
+            <button id="mis">My missions</button> 
+        </div>
+
+        <div class="user_main_work" id="template">
+
+            <div class="my_account_class">
+                <p id="my_account_tip"> Click 'My account' tab to check your personal info</p>
+            </div>
+            <div class="my_vehicle_class">
+                <p id="my_vehicle_tip"> Click 'My vehicle' tab to check your vehicle info</p>
+            </div>
+            <div class="my_missions_class">
+                <p id="my_missions_tip"> Click 'My missions' tab to check your missions</p>
+            </div>
+            <div class="logout_class">
+                <p id="logout_tip"> Click 'Logout' tab to sign out of your account</p>            
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,325 @@
+body{
+    background-color: darkslateblue;
+}
+
+.admin_main{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.admin_top{
+    position:relative;
+    width: 100%;
+    height: 20%;
+}
+
+.admin_nav_info{
+    height: 100%;
+    width: 60%;
+    position:relative;
+    float: left;
+}
+
+.admin_nav_info #admin_app_icon{
+    width: 13%;
+    height: 70%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.admin_nav_info #admin_welcome{
+    width: 80%;
+    height: 90%;
+    float: right;
+    font-size: 400%;
+    font-style: italic;
+    color: white;
+}
+
+/*--------------------------------------*/
+.admin_nav_username_dropdown {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    float: right;
+}
+
+.admin_username_button {
+    background-image: url('/icons/user_main.png');
+    background-position-y: center;
+    background-position-x: 90%;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color: white;
+    text-indent: 4%;
+    width: 30%;
+    min-width: 40%;
+    padding-right: 50px;
+    height: 30%;
+    float: right;
+    text-align: center;
+    padding-left: 2%;
+    font-size: 140%;
+    border: none;
+    cursor: pointer;
+}
+  
+.admin_username_button:hover, .admin_username_button:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+    margin-top: 7.6%;
+    margin-left: 70%;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 30%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black;
+    text-decoration: none;
+    display: block;
+    border: none;
+    font-size: large;
+    width: 100%;
+    padding: 5%;
+}
+
+.admin_nav_username_dropdown button:hover {
+    display: block;
+    background-color: gray;
+    color: white;
+}
+
+.show {
+    display: block;
+}
+/*--------------------------------------*/
+
+.admin_down{
+    position:relative;
+    width: 100%;
+    height: 80%;
+}
+
+.admin_sidebar{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.admin_sidebar #mis{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+}
+
+.admin_sidebar #mis:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.admin_sidebar #users_all{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.admin_sidebar #users_all:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.admin_sidebar #veh_all{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.admin_sidebar #veh_all:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.admin_sidebar #mis_all{
+    display: block;
+    border: none;
+    background: fixed;
+    color: white;
+    font-size: 170%;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.admin_sidebar #mis_all:hover{
+    display: block;
+    background: none;
+    color: black;
+    background-color: red;
+}
+
+.admin_main_work{
+    width: 80%;
+    height: 100%;
+    float: right;
+    background-color: white;
+    text-align: left;
+}
+
+.my_missions_class{
+    height: 5%;
+}
+
+.my_missions_class #my_missions_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.users_class{
+    height: 5%;
+}
+
+.users_class #users_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.vehicles_class{
+    height: 5%;
+}
+
+.vehicles_class #vehicles_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+.missions_class{
+    height: 5%;
+}
+
+.missions_class #missions_tip{
+    font-size: 140%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    padding-left: 2%;
+}
+
+@media all and (max-width:1680px){
+    .admin_username_button {
+        width: 28%;
+    }
+
+    .dropdown-content {
+        margin-top: 8.5%;
+    }
+}
+
+@media all and (max-width:1600px){
+    .admin_nav_info #admin_app_icon{
+        width: 12%;
+        height: 68%;
+    }
+    
+    .admin_nav_info #admin_welcome{
+        font-size: 350%;
+    }
+
+    .admin_username_button {
+        background-size: 16%;
+        width: 28%;
+        height: 28%;
+        font-size: 120%;
+        text-indent: 5%;
+    }
+
+    .dropdown-content {
+        margin-top: 7%;
+    }
+
+    .dropdown-content button {
+        font-size: medium;
+    }
+}
+
+@media all and (max-width:1440px){
+    .admin_nav_username #admin_username{
+        font-size: 120%;  
+    }
+}
+
+@media all and (max-width:1366px){
+    .admin_nav_info #admin_app_icon{
+        width: 11%;
+        height: 66%;
+    }
+    
+    .admin_nav_info #admin_welcome{
+        font-size: 290%;
+    }
+
+    .dropdown-content button {
+        font-size: small;
+    }
+
+    .admin_sidebar #mis{
+        font-size: 140%;   
+    }
+    
+    .admin_sidebar #users_all{
+        font-size: 140%;   
+    }
+    
+    .admin_sidebar #veh_all{
+        font-size: 140%;  
+    }
+    
+    .admin_sidebar #mis_all{
+        font-size: 140%;    
+    }
+}
+
+@media all and (max-width:1280px){
+    .admin_nav_info #admin_app_icon{
+        width: 15%;
+    }
+
+    .admin_nav_username #admin_username{
+        font-size: 125%;  
+    }
+}

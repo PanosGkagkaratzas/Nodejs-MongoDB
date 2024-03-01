@@ -1,0 +1,158 @@
+<div class="user_login">
+   
+    <div class="login_frame">
+
+        <div class="login">
+            <p id="log" class="log1">Welcome to Navigator</p>
+        </div>
+
+        <div class="c_login_message">
+            <% if (message) { %>
+                <p id="error_msg"> <%= message %> </p>
+            <% } %>
+        </div>
+
+        <div>
+            <button class="forgot" onclick="forgot_pass()">Forgot your password?</button>
+        </div>
+
+        <div class="forgotPopup" id="popupForm">
+
+            <div class="container">
+
+                <h2 id="forgot_title">Password recovery</h2>
+
+                <div class="f_login_email">
+                    <input type="text" name="Email" id="email2" placeholder="Email" value="<%= User.Email %>" >
+                </div>
+
+                <div class="f_login_pin">
+                    <input type="text" name="PIN" id="pin" placeholder="Recovery PIN" maxlength="4" value="<%= User.Recovery_PIN %>" >
+                </div>
+
+                <div class="f_login_pass">
+                    <input type="password" name="Password" id="pass2" placeholder="New Password" value="<%= User.Password %>" >
+                </div>
+
+                <div class="f_login_conf_pass">
+                    <input type="password" name="Password2" id="conf_pass2" placeholder="Confirm Password" value="<%= User.Password2 %>" >
+                </div>
+
+                <div class="f_buttons">
+                    <button id="change_password" onclick="change_pass(document.getElementById('email2').value,document.getElementById('pin').value,document.getElementById('pass2').value,document.getElementById('conf_pass2').value)">Change password</button> 
+                    <button type="button" id="f_cancel" onclick="forgot_pass_close()">Cancel</button>
+                </div>
+
+                <script>
+
+                    function change_pass(email2, pin, pass2, conf_pass2) {
+                        var response = '';
+                        
+                        $.ajax({ type: "POST",   
+                            url: "/users/recovery",  
+                            data: {
+                                "Email":email2,
+                                "Recovery_PIN":pin,
+                                "Password":pass2,
+                                "Password2":conf_pass2
+                            },
+                            dataType:"text",
+                            async: false,
+                            success : function(text)
+                            {
+                                response=text
+                                if(response=="Password changed successfully"){
+                                    swal({
+                                        title: "Success!",
+                                        text: response,
+                                        icon: "success",
+                                    });
+                                    forgot_pass_close();
+                                }
+                                else{
+                                    swal({
+                                        title: "Error!",
+                                        text: response,
+                                        icon: "error",
+                                    });
+                                }
+                            },
+                            error: function(e){
+                                swal({
+                                        title: "Login error!",
+                                        icon: "error",
+                                    });
+                            }
+                        });
+                    }
+
+                    function forgot_pass() {
+                        document.getElementById("popupForm").style.display = "block";
+                    }
+                    function forgot_pass_close() {
+                        document.getElementById("popupForm").style.display = "none";
+                    }
+
+                </script>
+
+          </div>
+
+        </div>
+
+        <div class="c_login_button">
+            
+            <form action="/users/login2" method="POST"> 
+
+                <input type="text" class="email_holder" name="Email" id="email" placeholder="Email" required >
+                <input type="password" class="pass_holder" name="Password" id="pass" placeholder="Password" required >
+
+                <input type="submit" class="login1_button" id="login_button" onclick="login_data(document.getElementById('email'))" value="Login" />
+
+            </form> 
+            
+            <script>
+
+                function login_data(email, pass) {                
+                    var mail = document.getElementById("email").value;
+                    sessionStorage.setItem("Email", mail);
+
+                    $.ajax({ type: "GET",   
+                        url: "/users/login/getPlate/"+mail,
+                        dataType:"text",
+                        success : function(text)
+                        {
+                            response = text
+
+                            if(response.startsWith("[{")){
+
+                                var parse = JSON.parse(response)
+                                var Vehicle_plate = parse[0].Vehicle_plate
+
+                                sessionStorage.setItem("Plate", Vehicle_plate);
+                            }
+                        },
+                        error: function(e){
+                            swal(response, {
+                                icon: "warning",
+                            });
+                        }
+                    });
+
+                }
+
+            </script>
+
+        </div>
+
+        <div class="line_l"></div>
+        <div> <p class="or">OR</p> </div>
+        <div class="line_2"></div>
+
+        <div class="c_register_button">
+            <p id="reg_text">Don't have account? </p>
+            <a href="/users/register"><button id="reg_button" type="button">Sign up now!</button></a>
+        </div>
+
+    </div>
+
+</div>

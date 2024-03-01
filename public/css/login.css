@@ -1,0 +1,431 @@
+body{
+    background-image: url('/icons/home.png');
+    background-size: auto;
+}
+
+.user_login{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.login_frame{
+    margin: auto;
+    width: 600px;
+    height: 650px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    margin-top: 100px;
+    position:relative;
+    opacity: 0.7;
+    background-color: white;
+}
+
+.login{
+    height: 50px;
+}
+
+.login #log{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.c_login_message{
+    position:relative;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    /*margin: 40px 40px 30px;*/
+}
+
+.c_login_message #error_msg{
+    color: red;
+    font-size: 25px;  
+}
+
+.c_login_button{
+    position: relative;
+    margin: 30px 40px 30px;
+
+}
+
+.c_login_button #email{
+    position: absolute;
+    background-image: url('/icons/user_login.png');
+    background-position-y: center;
+    background-size: 35px;
+    background-repeat: no-repeat;
+    text-indent: 45px;
+    font-weight: bold;
+    width: 502px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.c_login_button #pass{
+    margin-top: 70px;
+    position: absolute;
+    background-image: url('/icons/password.png');
+    background-position-y: center;
+    background-size: 35px;
+    background-repeat: no-repeat;
+    text-indent: 45px;
+    font-weight: bold;
+    width: 502px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.c_login_button #login_button{
+    background-color: green;
+    position: absolute;
+    width: 510px;
+    height: 56px;    
+    margin-top: 140px;
+    font-size: 30px;
+    color: white;
+}
+
+
+.forgot {
+    position: absolute;
+    border: none;
+    width: 300px;
+    margin-left: 300px;
+    background: none;
+    text-decoration: underline;
+    font-style: italic;
+    margin-top: 240px;
+    font-size: 18px;
+}
+
+.forgotPopup {
+    display: none;
+    position: fixed;
+    margin-left: 42px;
+    margin-top: -120px;    
+    z-index: 9;
+}
+
+.container{
+    width: 500px;
+    height: 600px;
+    position: fixed;
+    background-color: #fff;
+    border: 3px solid black;
+}
+
+.container #forgot_title{
+    text-align: center;
+    font-size: 30px;
+}
+
+.f_login_email{
+    width: 400px;
+    height: 50px;
+    position: relative;
+}
+
+.f_login_email #email2{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.f_login_pin{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.f_login_pin #pin{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.f_login_pass{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 40px;
+}
+
+.f_login_pass #pass2{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.f_login_conf_pass{
+    width: 400px;
+    height: 40px;
+    position: relative;
+    top: 60px;
+}
+
+.f_login_conf_pass #conf_pass2{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.f_buttons{
+    width: 400px;
+    height: 210px;
+    position: relative;
+    top: 130px;
+}
+
+.f_buttons #change_password{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 30px;
+    background-color: green;
+    font-size: 30px;
+    color: white;
+}
+
+.f_buttons #f_cancel{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: red;
+    font-size: 30px;
+    color: white;
+}
+
+.line_l {
+    position: absolute;
+    margin-top: 350px;
+    border-top: 4px solid black;
+    width: 240px;
+    margin-left: 5px;
+}
+
+.line_2 {
+    position: absolute;
+    margin-top: 350px;
+    border-top: 4px solid black;
+    width: 235px;
+    margin-left: 355px;
+}
+
+.or{
+    position: absolute;
+    width: 600px;
+    text-align: center;
+    margin-top: 327px;
+    font-size: 40px;
+    color: black;
+}
+
+.c_register_button{
+    position: absolute;
+    margin-top: 400px;
+    text-align: center;
+    width: 600px;
+    height: 30px;
+}
+
+.c_register_button #reg_text{
+    font-size: 25px;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 120px;
+}
+
+.c_register_button #reg_button{
+    position: absolute;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+    font-size: 23px;
+    margin-top: 4px;
+    margin-left: 28px;
+}
+
+@media all and (max-width:1600px){
+    .login_frame{
+        margin-top: 70px;
+    }
+}
+
+@media all and (max-width:1366px){
+    .login_frame{
+        width: 500px;
+        height: 550px;
+        margin-top: 50px;
+    }
+
+    .login{
+        height: 40px;
+    }
+    
+    .login #log{
+        font-size: 30px;
+    }
+    
+    .c_login_button{
+        margin: 20px 30px 20px;
+    }
+
+    .c_login_button #email{
+        background-size: 25px;
+        text-indent: 35px;
+        width: 435px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .c_login_button #pass{
+        margin-top: 60px;
+        background-size: 25px;
+        text-indent: 35px;
+        width: 435px;
+        height: 40px;
+        font-size: 15px;
+    }
+    
+    .c_login_button #login_button{
+        width: 443px;
+        height: 50px;    
+        margin-top: 120px;
+        font-size: 25px;
+    }
+    
+    .forgot {
+        width: 350px;
+        margin-left: 200px;
+        margin-top: 200px;
+    }
+    
+    .forgotPopup {
+        margin-left: 35px;
+        margin-top: -100px;    
+    }
+    
+    .container{
+        width: 427px;
+        height: 500px;
+    }
+    
+    .container #forgot_title{
+        font-size: 25px;
+    }
+    
+    .f_login_email{
+        width: 330px;
+        height: 40px;
+    }
+    
+    .f_login_email #email2{
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .f_login_pin{
+        width: 330px;
+        height: 40px;
+        top: 18px;
+    }
+    
+    .f_login_pin #pin{
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+    }
+    
+    .f_login_pass{
+        width: 330px;
+        height: 40px;
+        top: 36px;
+    }
+    
+    .f_login_pass #pass2{
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+    }
+    
+    .f_login_conf_pass{
+        width: 330px;
+        top: 54px;
+    }
+    
+    .f_login_conf_pass #conf_pass2{
+        margin-left: 48px;
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+    }
+    
+    .f_buttons{
+        width: 339px;
+        height: 180px;
+        top: 90px;
+    }
+    
+    .f_buttons #change_password{
+        width: 339px;
+        height: 40px;
+        margin-top: 20px;
+        font-size: 25px;
+    }
+    
+    .f_buttons #f_cancel{
+        width: 339px;
+        height: 40px;
+        font-size: 25px;
+    }
+    
+    .line_l {
+        margin-top: 300px;
+        border-top: 3px solid black;
+        width: 210px;
+        margin-left: 3px;
+    }
+    
+    .line_2 {
+        margin-top: 300px;
+        border-top: 3px solid black;
+        width: 210px;
+        margin-left: 285px;
+    }
+    
+    .or{
+        width: 500px;
+        margin-top: 285px;
+        font-size: 30px;
+    }
+    
+    .c_register_button{
+        margin-top: 340px;
+        width: 500px;
+        height: 25px;
+    }
+    
+    .c_register_button #reg_text{
+        font-size: 22px;
+        margin-left: 100px;
+    }
+    
+    .c_register_button #reg_button{
+        font-size: 21px;
+    }
+}

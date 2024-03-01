@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <link rel="stylesheet" href="/css/getMission.css">
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <script
+            src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"
+            src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"
+            scr="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+            
+        <div class="missionInfo">
+
+            <input type="text" id="keyword" onkeyup="findWord()" placeholder="Search">
+            <p id="counter"></p>
+
+            <table id="mission">
+                <thead>
+                    <tr>
+                        <th>Vehicle Plate</th>
+                        <th>Start Time</th>
+                        <th>Departure</th> 
+                        <th>Destination</th>
+                        <th>End Time</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+        
+            <script>
+                
+                var response = '';
+                var userID = sessionStorage.getItem("User_id")
+                var NumID_table = []
+                var MissionSize_table
+
+                $.ajax({ type: "GET",
+                url: "/users/login/stats/missions/"+userID,   
+                    success: function(data){
+
+                        response = data
+
+                        NumID_table = new Array(response.length);
+                        for(var i = 0; i<response.length; i++){
+                            NumID_table[i] = new Array(2);
+                        };
+
+                        var mission_data = '';
+
+                        for (let i = 0; i < response.length; i++) {
+
+                            mission_data += '<tbody>';
+
+                            mission_data += '<tr>';
+
+                            mission_data += '<td>' + response[i].Vehicle_plate + '</td>';
+
+                            mission_data += '<td>' + response[i].Start_time + '</td>';
+
+                            var start1 = response[i].Start;
+                            var start2 = start1.toString().replaceAll(",","<br>");
+                            var start3 = start2.toString().replaceAll("Ελλάδα","");
+                            mission_data += '<td>' + start3 + '</td>';
+
+                            var stops1 = response[i].Stops[response[i].Stops.length-1];
+                            var stops2 = stops1.toString().replaceAll(",","<br>");
+                            var stops3 = stops2.toString().replaceAll("Ελλάδα","");
+                            mission_data += '<td>' + stops3 + '</td>';
+
+                            mission_data += '<td>' + response[i].End_Time + '</td>';
+
+                            mission_data += '<td>' + response[i].Active + '</td>';
+
+                            NumID_table[i][0] = i
+                            NumID_table[i][1] = response[i]._id
+
+                            mission_data += '<td>' +'<input id="map" type="button" onclick="openMap(this)">' + '<input id="delete" type="button" onclick="deleteMission(this)">' + '</td>';
+
+                            mission_data += '</tr>';
+
+                            mission_data += '</tbody>';
+
+                        }
+
+                        MissionSize_table = response.length;
+                        document.getElementById("counter").innerHTML = "Number of missions: " + MissionSize_table
+
+                        $("#mission").append(mission_data);
+                        
+                    }
+                });              
+
+
+                function findWord() {
+
+                    // Search all columns
+                    $('#keyword').keyup(function(){
+                        // Search Text
+                        var search = $(this).val();
+
+                        // Hide all table tbody rows
+                        $('table tbody tr').hide();
+
+                        // Count total search result
+                        var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+                        if(len > 0){
+                            // Searching text in columns and show match row
+                            $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+                                $(this).closest('tr').show();
+                            });
+                        }else{
+                            $('.notfound').show();
+                        }
+                    });
+                }
+
+                function openMap(r){
+                    var id;
+                    var i = r.parentNode.parentNode.rowIndex;
+
+                    for(var z=0; z<NumID_table.length; z++)
+                    {
+   
+                        if(NumID_table[z][0]==i-1)
+                        {
+                            id = NumID_table[z][1]
+                        }
+
+                    }
+
+                    $.ajax({ type: "GET",   
+                        url: "/users/login/stats/missions/getCoordinates/"+id,
+                        success: function(data){
+                            response = data
+
+                            localStorage.setItem("latlng", JSON.stringify(response.Coordinates));  
+
+                        }
+                    })
+                    window.open(
+                        'http://localhost:3000/users/login/stats/missions/get/getMap',
+                        '_blank'
+                    );
+
+                }
+                
+                
+                function deleteMission(r) {                   
+                    var i = r.parentNode.parentNode.rowIndex;
+
+                    swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, this operation can't be reverted!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            for(var z=0; z<NumID_table.length; z++)
+                            {
+
+                                if(NumID_table[z][0]==i-1)
+                                {
+                                                                                        
+                                    $.ajax({ type: "DELETE",   
+                                        url: "/users/login/stats/missions/"+NumID_table[z][1],
+                                        success: function(data){
+                                        }
+                                    })
+
+                                    NumID_table.splice(NumID_table[z][0], 1);
+
+                                    MissionSize_table = NumID_table.length;
+                                    document.getElementById("counter").innerHTML = "Number of missions: " + MissionSize_table
+
+                                }
+
+                            }
+
+                            for(var q=0; q<NumID_table.length; q++){
+                                NumID_table[q][0] = q;
+                            }
+
+                            document.getElementById("mission").deleteRow(i);
+
+                            swal("Mission has been deleted successfully!", {
+                                icon: "success",
+                            });
+                        }
+                    });
+                    
+                }
+
+            </script>
+
+    </body>
+
+</html>

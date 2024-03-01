@@ -1,0 +1,201 @@
+.AllUserInfo{
+    overflow-y: auto;
+    position:relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bar{
+    position: relative;
+    width: 100%;
+    height: 6%;
+}
+
+.bar #keyword{
+    position: absolute;
+    background-image: url('/icons/search.png');
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 6%;
+    text-indent: 6%;
+    width: 30%;
+    height: 90%;
+    font-size: 16px;
+    float: left;
+    border: 1px solid #ddd;
+}
+
+.bar #addUser
+{
+    position: relative;
+    background-image: url('/icons/add.png');
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 80%;
+    float: right;
+    width: 50px;
+    height: 100%;
+    border-style: none;
+}
+
+.bar #counter{
+    position: absolute;
+    height: 0px;
+    float: right;
+    font-size: 20px;
+    color: black;
+    padding-left: 50%;
+}
+
+.editPopup {
+    display: none;
+    position: relative;
+    margin-left: 34%;
+}
+
+.edit_container{
+    width: 500px;
+    height: 550px;
+    position: fixed;
+    background-color: #fff;
+    border: 3px solid black;
+}
+
+.edit_container #edit_title{
+    text-align: center;
+    font-size: 30px;
+}
+
+.e_fname{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.e_fname #edit_fname{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_lname{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 40px;
+}
+
+.e_lname #edit_lname{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.e_email{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    top: 60px;
+}
+
+.e_email #edit_email{
+    margin-left: 48px;
+    font-weight: bold;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.edit_buttons{
+    width: 400px;
+    height: 210px;
+    position: relative;
+    top: 120px;
+}
+
+.edit_buttons #complete_edit{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 30px;
+    background-color: green;
+    font-size: 30px;
+    color: white;
+}
+
+.edit_buttons #edit_cancel{
+    margin-left: 48px;
+    width: 410px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: red;
+    font-size: 30px;
+    color: white;
+}
+
+table{
+    background-color: white;
+    width: 100%;
+    text-align: center; 
+    border: 1px solid black;
+}
+
+th{
+    width: 10%;
+    height: 10%;
+    color: white;
+    border: 1px solid black;
+    background-color: darkslateblue;
+    font-size: x-large;
+}
+
+td{
+    width: 10%;
+    height: 20%;
+    border: 1px solid black;
+    font-size: larger;
+    font-style: italic;
+}
+
+table #edit{
+    margin-left: 20%;
+    background-image: url('/icons/user-settings.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: left;
+    border: none;
+}
+
+table #delete{
+    margin-right: 20%;
+    background-image: url('/icons/delete.png');
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    width: 50px;
+    height: 40px;
+    color: white;
+    float: right;
+    border: none;
+}
+
+table #edit:hover{
+    background-color: gray;
+}
+
+table #delete:hover{
+    background-color: gray;
+}

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <link rel="stylesheet" href="/css/getAllUsers.css">
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <script
+            scr="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+            crossorigin="anonymous">
+        </script>
+        
+        <div class="AllUserInfo">
+
+            <div class="bar">
+                <input type="text" id="keyword" onkeyup="findWord()" placeholder="Search">
+                <p id="counter"></p>
+                <input type="button" id="addUser" onclick="newUser()">
+            </div>
+
+            <div class="editPopup" id="EditPopupForm">
+
+                <div class="edit_container">
+
+                    <h2 id="edit_title">Edit users info</h2>
+
+                    <div class="e_fname">
+                        <input type="text" id="edit_fname" name="FirstName" value="<%= User.FirstName %>" >
+                    </div>
+    
+                    <div class="e_lname">
+                        <input type="text" id="edit_lname" name="LastName" value="<%= User.LastName %>" >
+                    </div>
+    
+                    <div class="e_email">
+                        <input type="text" id="edit_email" name="Email" value="<%= User.Email %>" >
+                    </div>
+
+                    <div class="edit_buttons">
+                        <button id="complete_edit" onclick="edit_profile(document.getElementById('edit_fname').value,document.getElementById('edit_lname').value,document.getElementById('edit_email').value)">Confirm changes</button> 
+                        <button type="button" id="edit_cancel" onclick="editUser_close()">Cancel</button>
+                    </div>
+
+                    <script>
+
+                        var selected_email;
+
+                        function findWord() {
+
+                            // Search all columns
+                            $('#keyword').keyup(function(){
+                                // Search Text
+                                var search = $(this).val();
+
+                                // Hide all table tbody rows
+                                $('table tbody tr').hide();
+
+                                // Count total search result
+                                var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+                                if(len > 0){
+                                    // Searching text in columns and show match row
+                                    $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+                                        $(this).closest('tr').show();
+                                    });
+                                }else{
+                                    $('.notfound').show();
+                                }
+                            });
+                        }
+
+                        function newUser(){
+                            //sessionStorage.clear();
+                            window.location='/users/register/'
+                        }
+
+                        function editUser(r) {
+                            var i = r.parentNode.parentNode.rowIndex;
+
+                            for(var z=0; z<AllUsersInfo_table.length; z++)
+                            {
+        
+                                if(AllUsersInfo_table[z][0]==i-1)
+                                {
+                                    selected_email = AllUsersInfo_table[z][3];
+                                    document.querySelector('[name="FirstName"]').value = AllUsersInfo_table[z][1];
+                                    document.querySelector('[name="LastName"]').value = AllUsersInfo_table[z][2];
+                                    document.querySelector('[name="Email"]').value = AllUsersInfo_table[z][3];
+                                }
+                            }
+
+                            document.getElementById("EditPopupForm").style.display = "block";
+                        }
+
+                        function editUser_close() {
+                            document.getElementById("EditPopupForm").style.display = "none";
+                        }
+
+                        function edit_profile(ed_fname, ed_lname, ed_email) {
+                            var response = '';
+   
+                            $.ajax({ type: "POST",   
+                                url: "http://localhost:3000/users/login/updateUser",  
+                                data: {
+                                    "OldEmail":selected_email,
+                                    "FirstName":ed_fname,
+                                    "LastName":ed_lname,
+                                    "Email":ed_email
+                                },
+                                dataType:"text",
+                                async: false,
+                                success : function(text)
+                                {
+                                    response=text
+                                    if(response=="Profile changed successfully"){
+                                        swal({
+                                            title: "Success!",
+                                            text: "Applying changes...\nRestarting page in 5 seconds",
+                                            icon: "success"
+                                        });
+
+                                        var mail = sessionStorage.getItem("Email")
+
+                                        if(mail==selected_email)
+                                        {
+                                            sessionStorage.setItem("Email", ed_email);
+                                        }
+                                        else{
+                                            sessionStorage.setItem("Email", mail);
+                                        }
+
+                                        document.getElementById("EditPopupForm").style.display = "none";
+
+                                        setTimeout(function() {
+                                            document.location.reload()
+                                        }, 5000);
+                                    }
+                                    else{
+                                        swal({
+                                            title: "Warning!",
+                                            text: response,
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                error: function(e){
+                                    swal("Error saving users info", {
+                                        icon: "warning",
+                                    });
+                                }
+                            });  
+                        }
+
+                    </script>
+
+                </div>
+
+            </div>
+
+            <table id="users_table">
+
+                <thead>
+
+                    <tr>
+                        <th> First name </th>
+                        <th> Last name </th>
+                        <th> Email </th>
+                        <th> Registration date </th>
+                        <th> Actions </th>
+                    </tr>
+                    
+                </thead>
+
+            </table>
+
+        </div>
+        
+            <script>
+
+                var AllUsersInfo_table = []
+                var AllUsersSize
+
+                $.ajax({ type: "GET",   
+                    url: "/users/login/totalUsers/",
+                    success: function(data){
+                    
+                        response = data
+                        var users_data = '';
+
+                        AllUsersInfo_table = new Array(response.length);
+
+                        for(var i = 0; i<response.length; i++){
+                            AllUsersInfo_table[i] = new Array(4);
+                        };
+
+                        for (let i = 0; i < response.length; i++) {
+
+                            AllUsersInfo_table[i][0] = i
+                            AllUsersInfo_table[i][1] = response[i].FirstName
+                            AllUsersInfo_table[i][2] = response[i].LastName
+                            AllUsersInfo_table[i][3] = response[i].Email
+
+                            users_data += '<tbody>';
+
+                            users_data += '<tr>';
+
+                            users_data += '<td>' + response[i].FirstName + '</td>';
+
+                            users_data += '<td>' + response[i].LastName + '</td>';
+
+                            users_data += '<td>' + response[i].Email + '</td>';
+
+                            users_data += '<td>' + response[i].Register_time + '</td>';
+
+                            users_data += '<td>' + '<input id="edit" type="button" onclick="editUser(this)">' + '<input id="delete" type="button" onclick="deleteUser(this)">' + '</td>';
+
+                            users_data += '</tr>';
+
+                            users_data += '</tbody>';
+
+                        }
+
+                        AllUsersSize = response.length;
+                        document.getElementById("counter").innerHTML = "Number of users: " + AllUsersSize
+
+                        $("#users_table").append(users_data);
+                        
+                    }
+                }); 
+                
+                function deleteUser(r) {
+                    var i = r.parentNode.parentNode.rowIndex;
+                    var selected_email = 
+
+                    swal({
+                    title: "Are you sure you want to delete this user?",
+                    text: "Once deleted, this operation can't be reverted!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            for(var z=0; z<AllUsersInfo_table.length; z++)
+                            {
+        
+                                if(AllUsersInfo_table[z][0]==i-1)
+                                {
+
+                                    selected_email = AllUsersInfo_table[z][3]
+
+                                    $.ajax({ type: "GET",   
+                                    url: "/users/login/getID/"+selected_email,
+                                    dataType:"text",
+                                    success : function(text)
+                                    {
+                                        response = text
+
+                                        if(response.startsWith("{")){
+                                            
+                                            var myArray = response.toString().split(':');
+                                            var myArray2 = myArray[1].toString().replaceAll("\"","")
+                                            var userID = myArray2.toString().replace("}","")
+                                            
+                                            var myEmail = sessionStorage.getItem("Email")
+                                            if(myEmail == selected_email)
+                                            {
+                                                $.ajax({ type: "DELETE",   
+                                                    url: "/login/completeDelete/",
+                                                    data: {
+                                                        "ID":userID
+                                                    },
+                                                    dataType:"text",
+                                                    success: function(data){
+                                                        swal("User has been deleted!\nLogging out...", {
+                                                            icon: "success",
+                                                        });
+                                                        var timer = setTimeout(function() {
+                                                            window.location='http://localhost:3000/users'
+                                                        }, 3000);
+                                                    }
+                                                })                                            
+                                            }
+                                            else{  
+                                                $.ajax({ type: "DELETE",   
+                                                url: "http://localhost:3000/users/login/completeDelete/",
+                                                data: {
+                                                    "ID": userID
+                                                },
+                                                success: function(data){
+                                                    swal("User has been deleted successfully!", {
+                                                        icon: "success",
+                                                    });
+                                                }
+                                                })
+                                            }
+
+                                        }
+                                        
+                                    },
+                                    error: function(e){
+                                        swal({
+                                            title: "Error!",
+                                            text: "Error fetching users info",
+                                            icon: "error",
+                                            button: "OK",
+                                        });
+                                    }
+                                    });
+                                
+                                }
+                            }
+                        
+                            document.getElementById("users_table").deleteRow(i);
+
+                        }
+                    });
+
+                }
+               
+            </script>
+
+    </body>
+
+</html>

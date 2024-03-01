@@ -1,0 +1,269 @@
+<div class="vehicle_register">
+
+    <div class="register_vehicle_info">
+
+        <img id="vehicle_register_tip_icon" src="/icons/tips.png" alt="image error">
+        <p id="vehicle_register_tip">Useful tips</p>
+
+        <div class="c_register_manufactor_tip">
+
+            <label id="manufactor_tip_label"> Manufactor: </label>
+            <p id="manufactor_tip"> Must have only characters </p>
+
+        </div>
+
+        <div class="c_register_model_tip">
+
+            <label id="model_tip_label"> Model: </label>
+            <p id="model_tip"> You can insert characters and numbers </p>
+
+        </div>
+
+        <div class="c_register_plate_tip">
+
+            <label id="plate_tip_label"> Vehicle Plate: </label>
+            <p id="plate_tip"> Correct plate form : AAA-1234 </p>
+
+        </div>
+
+        <div class="c_register_category_tip">
+
+            <label id="category_tip_label"> Category: </label>
+            <p id="category_tip"> Choose the type of your vehicle </p>
+
+        </div>
+
+        <div class="c_register_color_tip">
+
+            <label id="color_tip_label"> Color: </label>
+            <p id="color_tip"> Must have only characters </p>
+
+        </div>
+
+        <div class="c_register_cc_tip">
+
+            <label id="cc_tip_label"> CC: </label>
+            <p id="cc_tip"> Must have only numbers </p>
+
+        </div>
+
+        <div class="c_register_hp_tip">
+
+            <label id="hp_tip_label"> Horse Power: </label>
+            <p id="hp_tip"> Must have only numbers </p>
+
+        </div>
+
+        <div class="c_register_date_tip">
+
+            <label id="date_tip_label"> Date of construction: </label>
+            <p id="date_tip"> Select the date your vehicle was manufactured  </p>
+
+        </div>
+
+        <p id="free_tips">Feel free to sign up now. It's 100% free!</p>
+
+    </div>
+
+    <div class="register_vehicle_frame">
+
+        <div class="vehicle_logo">
+            <img id="vehicle_img" src="/icons/vehicle.png" alt="" />
+        </div>
+    
+        <h1>Vehicle info</h1>
+
+        <div class="c_register_manufactor">
+            <label id="manufactor_label"> Manufactor </label>
+            <input type="text" name="Manufactor" id="manufactor" value="<%= Vehicle.Manufactor %>" >
+        </div>
+
+        <div class="c_register_model">
+            <label id="model_label"> Model </label>
+            <input type="text" name="Model" id="model" value="<%= Vehicle.Model %>" >
+        </div>
+
+        <div class="c_register_plate">
+            <label id="plate_label"> Vehicle Plate </label>
+            <input type="text" name="Vehicle_plate" id="plate"  maxlength="8" value="<%= Vehicle.Vehicle_plate %>">
+        </div>
+
+        <div class="c_register_category">
+            <label id="category_label"> Category </label>
+            <select id="category">
+                <option value = "<%= Vehicle.Type %>" selected>Car</option>
+                <option value = "<%= Vehicle.Type %>">Bus</option>
+                <option value = "<%= Vehicle.Type %>">Motorcycle</option>
+                <option value = "<%= Vehicle.Type %>">Scooter</option>
+                <option value = "<%= Vehicle.Type %>">Taxi</option>
+                <option value = "<%= Vehicle.Type %>">Tractor</option>
+                <option value = "<%= Vehicle.Type %>">Truck</option>
+                <option value = "<%= Vehicle.Type %>">Van</option>
+            </select>
+        </div>
+
+        <div class="c_register_color">
+            <label id="color_label"> Color </label>
+            <input type="text" name="Color" id="color" value="<%= Vehicle.Color %>" >
+        </div>
+
+        <div class="c_register_cc">
+            <label id="cc_label"> CC </label>
+            <input type="text" name="CC" id="cc"  maxlength="4" value="<%= Vehicle.CC %>" >
+        </div>
+
+        <div class="c_register_hp">
+            <label id="hp_label"> Horse Power </label>
+            <input type="text" name="HP" id="hp" maxlength="4" value="<%= Vehicle.HP %>" >
+        </div>
+
+        <div class="c_register_date">
+            <label id="date_label"> Date of construction </label>
+            <input type="text" class="date-format" id="date" name="con_date" />
+        </div>
+
+        <div class="c_register_button">
+
+            <button id="register_button" onclick="vehicle_register_data(document.getElementById('manufactor').value,document.getElementById('model').value,document.getElementById('plate').value,document.getElementById('category').value,document.getElementById('color').value,document.getElementById('cc').value,document.getElementById('hp').value,document.getElementById('date').value)">Register</button>
+
+            <script>
+
+                var isShift = false;
+                var seperator = "/";
+                window.onload = function () {
+                
+                    var inputs = document.getElementsByName('con_date')
+            
+                    //Loop through all INPUT elements.
+                    for (var i = 0; i < inputs.length; i++) {
+                        //Check whether the INPUT element is TextBox.
+                        if (inputs[i].type == "text") {
+                            //Check whether Date Format Validation is required.
+                            if (inputs[i].className.indexOf("date-format") != 1) {
+                                
+                                //Set Max Length.
+                                inputs[i].setAttribute("maxlength", 10);
+            
+                                //Only allow Numeric Keys.
+                                inputs[i].onkeydown = function (e) {
+                                    return IsNumeric(this, e.keyCode);
+                                };
+            
+                            
+                            }
+                        }
+                    }
+                };
+        
+                function IsNumeric(input, keyCode) {
+                    if (keyCode == 16) {
+                        isShift = true;
+                    }
+                    //Allow only Numeric Keys.
+                    if (((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode <= 37 || keyCode <= 39 || (keyCode >= 96 && keyCode <= 105)) && isShift == false) {
+                        if ((input.value.length == 2 || input.value.length == 5) && keyCode != 8) {
+                            input.value += seperator;
+                        }
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
+                
+                function vehicle_register_data(manufactor, model, plate, category, color, cc, hp, date) {
+                    var response = '';
+                    
+                    var e = document.getElementById("category");
+                    var type = e.options[e.selectedIndex].text;
+                    var new_email = sessionStorage.getItem("Register_email")
+                    var Account_type = sessionStorage.getItem("account_type");
+
+                    $.ajax({ type: "GET",   
+                    url: "/users/getID/"+new_email,
+                    dataType:"text",
+                    success : function(text)
+                    {
+                        response = text
+
+                        if(response.startsWith("{")){
+
+                            var myArray = response.toString().split(':');
+                            var myArray2 = myArray[1].toString().replaceAll("\"","")
+                            var userID = myArray2.toString().replace("}","")
+
+                            $.ajax({ type: "POST",   
+                            url: "/users/register/vehicle",  
+                            data: {
+                                "User_id": userID,
+                                "Vehicle_plate":plate,
+                                "Manufactor":manufactor,
+                                "Model":model,
+                                "Type":type,
+                                "Color":color,
+                                "CC":cc,
+                                "HP":hp,
+                                "Date_of_construction":date
+                            },
+                            dataType:"text",
+                            async: false,
+                            success : function(text)
+                            {
+                                response=text
+                                if(response=="Vehicle has been successfully registered!"){
+                                    swal("Registration completed successfully!", {
+                                        icon: "success",
+                                    });
+                                    
+                                    if(Account_type=="User")
+                                    {
+                                        var old_mail = sessionStorage.getItem("Email")
+                                        sessionStorage.setItem("Email", old_mail);
+
+                                        var timer = setTimeout(function() {
+                                            window.location='http://localhost:3000/users/login/user/'
+                                        }, 3000);
+                                    }
+                                    else if(Account_type=="Administrator"){
+                                        var old_mail = sessionStorage.getItem("Email")
+                                        sessionStorage.setItem("Email", old_mail);
+
+                                        var timer = setTimeout(function() {
+                                            window.location='http://localhost:3000/users/login/admin/'
+                                        }, 3000);
+                                    }
+                                    else{
+                                        var timer = setTimeout(function() {
+                                        window.location='http://localhost:3000/users'
+                                        }, 2000);
+                                    }
+                                    
+                                }
+                                else{
+                                    swal({
+                                        title: "Warning!",
+                                        text: response,
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                            error: function(e){
+                                swal({
+                                        title: "Warning!",
+                                        text: "Registration error",
+                                        icon: "error"
+                                    });
+                            }
+                            });
+                        }
+                    }
+                })
+ 
+                }
+            </script>
+
+        </div>
+
+    </div>
+
+</div>

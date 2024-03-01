@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <link rel="icon" href="/icons/icon.png" type="image/png">
+    <meta charset='utf-8' />
+    <title>Navigator - Map</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+      
+        var coordinates = JSON.parse(localStorage.getItem('latlng'));
+
+        //Reload page once to get new coordinates
+        if(window.location.href.substr(-2) !== "?r") {
+          window.location = window.location.href + "?r";
+        }
+        console.log(coordinates)
+    
+        var lat = coordinates[0].split(",")[0]
+
+        var lng = coordinates[0].split(",")[1]
+
+        coordinates.splice(coordinates[0], 1);
+       
+        let stops_latlng = new Array(coordinates.length);
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGFub3NnazEzIiwiYSI6ImNsODRoaWtvODBhdGUzcHF0M2RlMnBjcnEifQ.OTEWHuH7VyQcgOijF2_AgQ';
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [lng,lat],
+          zoom: 12
+        });
+        
+        const start = [lng, lat]
+
+        for(var i = 0; i<coordinates.length; i++){
+          stops_latlng[i] = new Array(2);
+        };
+
+        for(let x = 0; x<coordinates.length; x++)
+        {  
+            stops_latlng[x][0] = coordinates[x].split(",")[1]
+            stops_latlng[x][1] = coordinates[x].split(",")[0]
+        }
+         
+        const end = stops_latlng
+        
+        // this is where the code for the next step will go   
+
+        // create a function to make a directions request
+        async function getRoute(end) {
+
+          // make a directions request using cycling profile
+          // an arbitrary start will always be the same
+          // only the end or destination will change
+          const query = await fetch(
+            `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end.join(';')}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+
+            { method: 'GET' }
+          );
+          const json = await query.json();
+
+          const data = json.routes[0];
+          const route = data.geometry.coordinates;
+          const geojson = {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: route
+            }
+          };
+          // if the route already exists on the map, we'll reset it using setData
+          if (map.getSource('route')) {
+            map.getSource('route').setData(geojson);
+          }
+          // otherwise, we'll make a new request
+          else {
+            map.addLayer({
+              id: 'route',
+              type: 'line',
+              source: {
+                type: 'geojson',
+                data: geojson
+              },
+              layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              paint: {
+                'line-color': '#3887be',
+                'line-width': 5,
+                'line-opacity': 0.75
+              }
+            });
+          }
+        
+          // add turn instructions here at the end
+        }
+
+        map.on('load', () => {
+          // make an initial directions request that
+          // starts and ends at the same location
+          getRoute(start);
+
+          // Add starting point to the map
+          map.addLayer({
+            id: 'point',
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [
+                  {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'Point',
+                      coordinates: start
+                    }
+                  }
+                ]
+              }
+            },
+            paint: {
+              'circle-radius': 10,
+              'circle-color': '#3887be'
+            }
+          });
+          // this is where the code from the next step will go
+        });
+
+        map.on('load', () => {
+        
+          getRoute(end);
+
+          console.log(end.length)
+          for(let i=0; i<end.length; i++){
+          // Add stops to the map
+          map.addLayer({
+            id: 'stops'+i,
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [
+                  {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'Point',
+                      //coordinates: end[i]
+                      coordinates: end[i]
+                    }
+                  }
+                ]
+              }
+            },
+                  
+                paint: {
+                  'circle-radius': 10,
+                  'circle-color': '#f30'
+                }
+              });
+            }
+          
+        });
+        </script>
+  </body>
+</html>

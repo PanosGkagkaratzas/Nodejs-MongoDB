@@ -1,0 +1,35 @@
+body{
+    background-image: url('/icons/home.png');
+    background-size: auto;
+}
+
+.redirect_body{
+    position:absolute;
+    width: 99%;
+    height: 98%;
+}
+
+.frame{
+    margin: auto;
+    width: 600px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    margin-top: 300px;
+    position:relative;
+    background-color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.proc_text #redirect_text{
+    font-style: italic;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.bar #myBar{
+    width: 50%;
+    height: 30px;
+}
